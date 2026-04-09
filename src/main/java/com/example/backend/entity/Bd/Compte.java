@@ -1,4 +1,4 @@
-package com.example.backend.entity;
+package com.example.backend.entity.Bd;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -21,14 +21,17 @@ public class Compte {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id_cp;
+
     private int numcompte;
     private Date date_creation;
     private BigDecimal solde; 
     private String etat;
     private int  code_secret_compte;
+
     @ManyToOne
     @JoinColumn(name="id_U")
     private Client client;
+    
     public Compte(){}
     
     Compte(int numcompte,Date date_creation, BigDecimal solde,String etat,int  code_secret_compte,Client client){

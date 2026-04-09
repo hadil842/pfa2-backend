@@ -3,7 +3,7 @@ package com.example.backend.repository;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.backend.entity.Retrait_espece;
+import com.example.backend.entity.Bd.Retrait_espece;
 
 @Repository
 

@@ -1,4 +1,4 @@
-package com.example.backend.entity;
+package com.example.backend.entity.Bd;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -10,6 +10,7 @@ import jakarta.persistence.Table;
 @Table(name="epargne")
 public class Epargne extends Compte {
     private BigDecimal montant_mensuel;
+    
     public Epargne(){
         super();
     }

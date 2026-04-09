@@ -1,4 +1,4 @@
-package com.example.backend.entity;
+package com.example.backend.entity.Bd;
 import java.util.Date;
 
 import jakarta.persistence.Entity;
