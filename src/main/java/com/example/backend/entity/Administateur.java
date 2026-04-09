@@ -1,5 +1,7 @@
 package com.example.backend.entity;
 
+import java.util.Date;
+
 import jakarta.persistence.Entity;
 
 
@@ -11,9 +13,13 @@ public class Administateur extends Utilisateur{
 
     private String grade; 
     private int code_secret_admin; 
+    
+    public Administateur(){
+        super();
+    }
 
-    Administateur(int id, String name, String password, String mail, String grade , int secretcode) {
-        super(id, name, password, mail);
+    Administateur(String name,String password,String mail,Date date_naiss ,int numer_tel,String nom_complet,String etat_civil ,String grade,int secretcode) {
+        super(name,password,mail,date_naiss,numer_tel,nom_complet,etat_civil);
         this.grade=grade; 
         this.code_secret_admin=secretcode; 
     }

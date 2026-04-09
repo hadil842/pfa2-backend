@@ -29,12 +29,16 @@ public class Utilisateur {
     private String nom_complet ; 
     private String etat_civil ;  
 
-
-    Utilisateur(int id,String name,String password,String mail){
-        this.id_U=id;
+    public Utilisateur(){}
+    
+    Utilisateur(String name,String password,String mail,Date date_naiss ,int numer_tel,String nom_complet,String etat_civil ){
         this.nomaccess=name;
         this.mot_de_passe=password;
         this.email=mail;
+        this.date_naiss=date_naiss;
+        this.numer_tel=numer_tel;
+        this.nom_complet=nom_complet;
+        this.etat_civil=etat_civil;
     }
     public int getId(){return this.id_U;}
     public String getAccessname(){return this.nomaccess;}

@@ -1,6 +1,7 @@
 package com.example.backend.entity;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -12,9 +13,10 @@ public class Client extends Utilisateur{
     String profession; 
     BigDecimal salaire; 
 
+    public Client(){super();}
 
-    Client(int id, String name, String password, String mail,String profession,BigDecimal salary ) {
-        super(id, name, password, mail);
+    Client( String name,String password,String mail,Date date_naiss ,int numer_tel,String nom_complet,String etat_civil,String profession,BigDecimal salary  ) {
+        super(name,password,mail,date_naiss,numer_tel,nom_complet,etat_civil);
         this.profession = profession; 
         this.salaire=salary; 
     }
