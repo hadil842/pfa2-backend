@@ -1,0 +1,98 @@
+package com.example.backend.entity;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Inheritance(strategy=InheritanceType.JOINED)
+@Table(name="transactions")
+
+public class Transactions {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    private int id_tr;
+    private Date date_heure;
+    private BigDecimal montant;
+    private int duree;
+    private String localisation;
+    private String statut;
+    private String type_fr = null;
+
+    @ManyToOne
+    @JoinColumn (name="id_admin")
+    private Administrateur admin=null;
+    public void setAdministrateur(Administrateur admin) {this.admin = admin;}
+    public Administrateur getAdministrateur() {return admin;}
+
+    @ManyToOne
+    @JoinColumn (name="id_cp")
+    private Compte cp;
+    public void setCompte(Compte cp) {this.cp = cp;}
+    public Compte getCompte() {return cp;}
+
+
+    public Transactions() {}
+
+     Transactions(Date date_heure, BigDecimal montant, int duree, String localisation, String statut,String type_fr) {
+        this.date_heure = date_heure;
+        this.montant = montant;
+        this.duree = duree;
+        this.localisation = localisation;
+        this.statut = statut;
+        this.type_fr = type_fr;
+    }
+     public int getId_tr() {
+         return id_tr;
+     }
+     public void setId_tr(int id_tr) {
+         this.id_tr = id_tr;
+     }
+     public Date getDate_heure() {
+         return date_heure;
+     }
+     public void setDate_heure(Date date_heure) {
+         this.date_heure = date_heure;
+     }
+     public BigDecimal getMontant() {
+         return montant;
+     }
+     public void setMontant(BigDecimal montant) {
+         this.montant = montant;
+     }
+     public int getDuree() {
+         return duree;
+     }
+     public void setDuree(int duree) {
+         this.duree = duree;
+     }
+     public String getLocalisation() {
+         return localisation;
+     }
+     public void setLocalisation(String localisation) {
+         this.localisation = localisation;
+     }
+     public String getStatut() {
+         return statut;
+     }
+     public void setStatut(String statut) {
+         this.statut = statut;
+     }
+     public String getType_fr() {
+         return type_fr;
+     }
+     public void setType_fr(String type_fr) {
+         this.type_fr = type_fr;
+     }
+    
+}

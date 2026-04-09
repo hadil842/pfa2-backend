@@ -16,9 +16,11 @@ public class Alerte {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id_al;
     private Date date ;
+
     @ManyToOne
     @JoinColumn(name="id_client")
     private Client client;
+    
     @ManyToOne
     @JoinColumn(name="id_admin")
     private Administrateur administrateur;
