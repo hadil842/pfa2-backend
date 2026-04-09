@@ -1,11 +1,11 @@
 package com.example.backend.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Repository;
 
 import com.example.backend.entity.Client;
 
 @Repository
-public interface Clientrepository extends CrudRepository<Client, Integer> {
+public interface Clientrepository extends ListCrudRepository<Client, Integer> {
     
 }
