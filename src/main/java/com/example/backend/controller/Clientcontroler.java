@@ -1,11 +1,10 @@
 package com.example.backend.controller;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.backend.entity.Client;
-import com.example.backend.respitory.Clientrepository;
-
-import org.springframework.web.bind.annotation.GetMapping;
+import com.example.backend.repository.Clientrepository;
 
 
 

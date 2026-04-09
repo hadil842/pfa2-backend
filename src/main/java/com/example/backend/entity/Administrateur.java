@@ -3,8 +3,6 @@ package com.example.backend.entity;
 import java.util.Date;
 
 import jakarta.persistence.Entity;
-
-
 import jakarta.persistence.Table;
 
 @Entity
