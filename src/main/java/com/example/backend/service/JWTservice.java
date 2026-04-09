@@ -68,7 +68,7 @@ public class JWTservice {
 
    public Claims validateTokenAndGetClaims(String token) {
         try {
-            return extractAllClaims(token);
+            return isTokenExpired(token)?  null:extractAllClaims(token);
         } catch (Exception e) {
             System.err.println("JWT validation failed: " + e.getMessage());
             return null;

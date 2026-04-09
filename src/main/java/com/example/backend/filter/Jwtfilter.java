@@ -33,7 +33,6 @@ public class Jwtfilter extends OncePerRequestFilter {
                 Claims claims = jwtservice.validateTokenAndGetClaims(token);
                 if (claims != null) {
                     String accessname = claims.getSubject();
-                    //ist<String> roles = (List<String>) claims.get("roles");
                     List<GrantedAuthority> authorities = new ArrayList<>();
 
                     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(accessname, null, authorities);

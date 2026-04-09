@@ -21,6 +21,7 @@ public class Clientcontroler {
 
     @GetMapping("/clients")
     public Iterable<Client> getClient() {
+        System.out.println("ok");
         return this.clientresp.findAll();
     }
     

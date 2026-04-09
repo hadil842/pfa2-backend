@@ -1,23 +1,26 @@
 package com.example.backend.entity;
 
-import jakarta.persistence.Entity;
+import java.math.BigDecimal;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 @Entity
-public class Client extends User{
+@Table(name="client")
+public class Client extends Utilisateur{
 
     String profession; 
-    float salaire; 
+    BigDecimal salaire; 
 
 
-    Client(int id, String name, String password, String mail,String profession,int salary ) {
+    Client(int id, String name, String password, String mail,String profession,BigDecimal salary ) {
         super(id, name, password, mail);
         this.profession = profession; 
         this.salaire=salary; 
     }
 
-    public float getSalary (){ return this.salaire;}
-    public void setSalary (float salaire){ this.salaire=salaire;}
+    public BigDecimal getSalary (){ return this.salaire;}
+    public void setSalary (BigDecimal salaire){ this.salaire=salaire;}
 
     public String getProfession (){ return this.profession;}
     public void setProfession (String profession){ this.profession=profession;}

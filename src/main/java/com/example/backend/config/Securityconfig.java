@@ -31,6 +31,7 @@ public class Securityconfig {
     @Bean 
     public SecurityFilterChain securityFilterChain(HttpSecurity http,@Autowired  Jwtfilter jwtf)throws Exception{
         http.csrf(AbstractHttpConfigurer::disable)
+        .csrf(csrf -> csrf.disable())
         .authorizeHttpRequests(authorize ->authorize.requestMatchers("/clients").permitAll().anyRequest().authenticated())
         .sessionManagement(session ->session .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.addFilterBefore(jwtf, UsernamePasswordAuthenticationFilter.class);

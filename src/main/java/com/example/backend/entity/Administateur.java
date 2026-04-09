@@ -3,14 +3,16 @@ package com.example.backend.entity;
 import jakarta.persistence.Entity;
 
 
-@Entity
+import jakarta.persistence.Table;
 
-public class Admin extends User{
+@Entity
+@Table(name="administrateur")
+public class Administateur extends Utilisateur{
 
     private String grade; 
     private int code_secret_admin; 
 
-    Admin(int id, String name, String password, String mail, String grade , int secretcode) {
+    Administateur(int id, String name, String password, String mail, String grade , int secretcode) {
         super(id, name, password, mail);
         this.grade=grade; 
         this.code_secret_admin=secretcode; 

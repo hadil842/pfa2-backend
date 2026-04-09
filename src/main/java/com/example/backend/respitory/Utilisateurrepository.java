@@ -3,10 +3,11 @@ package com.example.backend.respitory;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.backend.entity.Administateur;
 
+import com.example.backend.entity.Utilisateur;
 
 @Repository
-public interface Adminrepository extends CrudRepository<Administateur, Integer> {
-    
+public interface Utilisateurrepository extends CrudRepository<Utilisateur, Integer> {
+
 }
+

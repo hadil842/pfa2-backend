@@ -6,13 +6,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
 
 
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "utilisateur")
-public class User {
+public class Utilisateur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_U;
@@ -27,7 +30,7 @@ public class User {
     private String etat_civil ;  
 
 
-    User(int id,String name,String password,String mail){
+    Utilisateur(int id,String name,String password,String mail){
         this.id_U=id;
         this.nomaccess=name;
         this.mot_de_passe=password;
