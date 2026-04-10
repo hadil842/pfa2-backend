@@ -4,9 +4,17 @@ package com.example.backend.entity;
 
 
 public class Authrequest {
-    private String accessname;
-    private String password;
+    private String nom;
+    private String mdp;
+    
 
-    public String getAccessname(){return this.accessname;}
-    public String getPassword(){return this.password;}
+    public Authrequest(String nom,String mdp){
+        this.nom=nom;
+        this.mdp=mdp;
+    }
+    public String getNom(){return this.nom;}
+    public String getMdp(){return this.mdp;}
+
+
+
 }

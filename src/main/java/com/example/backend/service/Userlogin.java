@@ -2,25 +2,37 @@ package com.example.backend.service;
 
 
 import org.springframework.stereotype.Service;
+
+import com.example.backend.entity.Bd.Client;
+import com.example.backend.repository.Clientrepository;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Service
 public class Userlogin {
 
-    private String accessname;
-    private String password;
+    private Clientrepository clientrepo ;
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public boolean authenticate(String username, String rawPassword){
-        if (accessname.equals(username) && passwordEncoder.matches(rawPassword, password)) {
-            return true;
-        } else {
-            if (!accessname.equals(username)) {
-                System.out.println("error: username does not match.");
-            }
-            if (!passwordEncoder.matches(rawPassword, password)) {
-                System.out.println("error: password does not match.");
-            }
-            return false;
+    public Userlogin(Clientrepository client){
+        this.clientrepo=client;
+    }
+
+    public Integer authenticateClient(String nom , String mdp){
+        
+        Client client=this.clientrepo.findByNomaccess(nom);
+        
+        if(client==null){
+            System.out.println("client non trouve");
+            return 0;
+        }else{
+           if (passwordEncoder.matches(mdp,client.getPassword())) {
+              return client.getId();
+           } else {
+                 System.out.println("error: mot de passe invalid ");
+                 return 0;
+           }
         }
     }
+
+
 }

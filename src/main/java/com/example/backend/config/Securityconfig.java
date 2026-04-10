@@ -32,7 +32,7 @@ public class Securityconfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http,@Autowired  Jwtfilter jwtf)throws Exception{
         http.csrf(AbstractHttpConfigurer::disable)
         .csrf(csrf -> csrf.disable())
-        .authorizeHttpRequests(authorize ->authorize.requestMatchers("/clients").permitAll().anyRequest().authenticated())
+        .authorizeHttpRequests(authorize ->authorize.requestMatchers("/loginclient").permitAll().anyRequest().authenticated())
         .sessionManagement(session ->session .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.addFilterBefore(jwtf, UsernamePasswordAuthenticationFilter.class);
         return http.build();

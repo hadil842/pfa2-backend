@@ -8,4 +8,6 @@ import com.example.backend.entity.Bd.Client;
 @Repository
 public interface Clientrepository extends ListCrudRepository<Client, Integer> {
     
+
+    public Client findByNomaccess(String accessname);
 }

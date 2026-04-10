@@ -18,14 +18,14 @@ import io.jsonwebtoken.security.Keys;
 @Service
 public class JWTservice {
 
-    public static final String SECRET = "abcd";
+    public static final String SECRET = "aVeryLongAndComplexSecretKeyForYourJWTApplicationThatIsAtLeast256BitsLong";
 
     public String generateToken(String email) {
         Map<String, Object> claims = new HashMap<>();
         return createToken(claims, email);
     }
 
-    private String createToken(Map<String, Object> claims, String  accessname) {
+    public String createToken(Map<String, Object> claims, String  accessname) {
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(accessname)
