@@ -8,5 +8,7 @@ import com.example.backend.entity.Bd.Administrateur;
 
 @Repository
 public interface Adminrepository extends ListCrudRepository<Administrateur, Integer> {
+
+    public Administrateur findByNomaccess(String nom);
     
 }

@@ -38,7 +38,7 @@ public class Logincontroler {
     }
 
     @PostMapping("/loginclient")
-    public ResponseEntity<?> Login(@RequestBody Authrequest request) {
+    public ResponseEntity<?> loginclient(@RequestBody Authrequest request) {
         Integer id=this.userservice.authenticateClient(request.getNom(),request.getMdp());
         
         if(id!=0){
@@ -54,11 +54,21 @@ public class Logincontroler {
         }
     }
     
-    
 
-    
+    @PostMapping("/loginadmin")
 
+    public ResponseEntity<?> loginAdmin (@RequestBody Authrequest request){
 
+        Integer id= this.userservice.authenticateAdmin(request.getNom(),request.getMdp());
     
+        if (id!=0){
+            Map<String,Object>claims=new HashMap<>();
+            claims.put("id",id);
+            String jwt=this.jwtservice.createToken(claims,request.getNom());
+            return ResponseEntity.ok(new Authreponse(jwt));}
+        else{
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+        }
+    }
     
 }
