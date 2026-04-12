@@ -37,9 +37,9 @@ public class Transactions {
 
     @ManyToOne
     @JoinColumn (name="id_cp")
-    private Compte cp;
-    public void setCompte(Compte cp) {this.cp = cp;}
-    public Compte getCompte() {return cp;}
+    private Compte compte;
+    public void setCompte(Compte cp) {this.compte = cp;}
+    public Compte getCompte() {return compte;}
 
 
     public Transactions() {}

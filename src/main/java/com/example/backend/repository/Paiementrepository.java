@@ -5,8 +5,10 @@ import org.springframework.stereotype.Repository;
 
 import com.example.backend.entity.Bd.Paiement;
 
+
 @Repository
 
 public interface Paiementrepository extends ListCrudRepository<Paiement, Integer> {
-
+    
+    Paiement findById(int id_tr);
 }

@@ -3,18 +3,23 @@ package com.example.backend.service;
 
 import org.springframework.stereotype.Service;
 
-import com.example.backend.repository.Utilisateurrepository;
+import com.example.backend.entity.Bd.Client;
+import com.example.backend.repository.Clientrepository;
+
 
 @Service
 public class Clientservice {
      
-    public Utilisateurrepository utilisateurrepository;
+    public Clientrepository clientrepositoryrepository;
 
     
-    Clientservice(Utilisateurrepository utilisateurrepository) {
-        this.utilisateurrepository = utilisateurrepository;
+    Clientservice(Clientrepository utilisateurrepository) {
+        this.clientrepositoryrepository = utilisateurrepository;
     }
-   public  String getNomComplet(int id_u){
-       return this.utilisateurrepository.findById(id_u).getFullname();
+    public  String getNomComplet(int id_u){
+       return this.clientrepositoryrepository.findById(id_u).getFullname();
+    }
+    public Client getClient(int id_u){
+        return this.clientrepositoryrepository.findById(id_u);
     }
 }

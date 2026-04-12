@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 
 import org.springframework.stereotype.Service;
 
+import com.example.backend.entity.Bd.Client;
+import com.example.backend.entity.Bd.Compte;
 import com.example.backend.repository.Clientrepository;
 import com.example.backend.repository.Compterepository;
 import com.example.backend.repository.Courantrepository;
@@ -29,16 +31,19 @@ public class Compteservice {
         this.clientrepository = clientrepository;
     }
    
-    public Integer getIdcompte(int id_u){
-        return this.compterepo.findByClient(this.clientrepository.findById(id_u)).getId_cp();
+    public Integer getIdcompte(Client cl){
+        return this.compterepo.findByClient(cl).getId_cp();
     }
-    public long getNumerocompte(int id_u){
-        return this.compterepo.findByClient(this.clientrepository.findById(id_u)).getNumcompte();
+    public long getNumerocompte(Client cl){
+        return this.compterepo.findByClient(cl).getNumcompte();
     }
-    public BigDecimal getSolde(int id_u){
-        return this.compterepo.findByClient(this.clientrepository.findById(id_u)).getSolde();
+    public BigDecimal getSolde(Client cl){
+        return this.compterepo.findByClient(cl).getSolde();
     }
     public String gettype(int id_cp){
         return this.couranterepo.findById(id_cp)!=null ? "Courant":"Epargne";
+    }
+    public Compte getCompte(int id_cp){
+        return this.compterepo.findById(id_cp);
     }
 }
