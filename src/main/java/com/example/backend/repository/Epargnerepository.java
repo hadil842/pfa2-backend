@@ -12,7 +12,7 @@ import com.example.backend.entity.Bd.Epargne;
 @Repository
 public interface Epargnerepository extends ListCrudRepository<Epargne, Integer> {
 
-    Epargne findById(int id_cp);
+    
     
 }
 

@@ -13,7 +13,7 @@ import com.example.backend.entity.Bd.Courant;
 @Repository
 public interface Courantrepository extends ListCrudRepository<Courant, Integer>{
     
-    Courant findById(int id_cp);
+    
 
     
 }

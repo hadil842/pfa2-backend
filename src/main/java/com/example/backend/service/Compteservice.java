@@ -9,7 +9,6 @@ import com.example.backend.entity.Bd.Compte;
 import com.example.backend.repository.Clientrepository;
 import com.example.backend.repository.Compterepository;
 import com.example.backend.repository.Courantrepository;
-import com.example.backend.repository.Epargnerepository;
 
 
 @Service
@@ -17,17 +16,15 @@ public class Compteservice {
 
     public Compterepository compterepo;
     public Courantrepository couranterepo;
-    public Epargnerepository epargnerepo;
     public Clientrepository clientrepository;
     
 
 
     
-    public Compteservice(Compterepository compterepo, Courantrepository couranterepo, Epargnerepository epargnerepo,
+    public Compteservice(Compterepository compterepo, Courantrepository couranterepo,
             Clientrepository clientrepository) {
         this.compterepo = compterepo;
         this.couranterepo = couranterepo;
-        this.epargnerepo = epargnerepo;
         this.clientrepository = clientrepository;
     }
    
@@ -41,7 +38,7 @@ public class Compteservice {
         return this.compterepo.findByClient(cl).getSolde();
     }
     public String gettype(int id_cp){
-        return this.couranterepo.findById(id_cp)!=null ? "Courant":"Epargne";
+        return this.couranterepo.existsById(id_cp)? "Courant":"Epargne";
     }
     public Compte getCompte(int id_cp){
         return this.compterepo.findById(id_cp);
