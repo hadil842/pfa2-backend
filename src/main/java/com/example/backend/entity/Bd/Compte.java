@@ -25,6 +25,15 @@ public class Compte {
     private long numcompte;
     private Date date_creation;
     private BigDecimal solde; 
+    private BigDecimal solde_init; 
+    public BigDecimal getSolde_init() {
+        return solde_init;
+    }
+
+    public void setSolde_init(BigDecimal solde_init) {
+        this.solde_init = solde_init;
+    }
+
     private String etat;
     private int  code_secret_compte;
 
@@ -34,13 +43,14 @@ public class Compte {
     
     public Compte(){}
     
-    Compte(long numcompte,Date date_creation, BigDecimal solde,String etat,int  code_secret_compte,Client client){
+    Compte(long numcompte,Date date_creation, BigDecimal solde,String etat,int  code_secret_compte,Client client,BigDecimal s){
         this.numcompte=numcompte;
         this.date_creation=date_creation;
         this.solde=solde;
         this.etat=etat;
         this.code_secret_compte=code_secret_compte;
         this.client=client;
+        this.solde_init=s;
     }
 
     public int getId_cp() {

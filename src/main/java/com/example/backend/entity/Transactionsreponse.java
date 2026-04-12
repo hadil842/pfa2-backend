@@ -4,6 +4,16 @@ package com.example.backend.entity;
 
 public class Transactionsreponse {
     private String date ;
+    private String statut;
+    
+    public String getStatut() {
+        return statut;
+    }
+
+    public void setStatut(String statut) {
+        this.statut = statut;
+    }
+
     public String getDate() {
         return date;
     }
@@ -36,11 +46,12 @@ public class Transactionsreponse {
         this.montant = montatnt;
     }
 
-    public Transactionsreponse(String date, String type, String reference, String montatnt) {
+    public Transactionsreponse(String date, String type, String reference, String montatnt,String statut) {
         this.date = date;
         this.type = type;
         this.reference = reference;
         this.montant = montatnt;
+        this.statut=statut;
     }
 
 }

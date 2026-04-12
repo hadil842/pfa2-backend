@@ -14,8 +14,8 @@ public class Epargne extends Compte {
     public Epargne(){
         super();
     }
-    Epargne(int numcompte,Date date_creation, BigDecimal solde,String etat,int  code_secret_compte,Client client,BigDecimal montant_mensuel){
-        super(numcompte,date_creation,solde,etat,code_secret_compte,client);
+    Epargne(int numcompte,Date date_creation, BigDecimal solde,String etat,int  code_secret_compte,Client client,BigDecimal montant_mensuel,BigDecimal solde_init){
+        super(numcompte,date_creation,solde,etat,code_secret_compte,client,solde_init);
         this.montant_mensuel=montant_mensuel;
     }
     public BigDecimal getMontant_mensuel(){ return this.montant_mensuel;}

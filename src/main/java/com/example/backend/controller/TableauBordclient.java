@@ -1,14 +1,18 @@
 package com.example.backend.controller;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.backend.entity.Recordreponse;
 import com.example.backend.entity.Tableaureponse;
-import com.example.backend.entity.Transactionsreponse;
+
 import com.example.backend.entity.Bd.Client;
 import com.example.backend.entity.Bd.Compte;
 import com.example.backend.service.Clientservice;
@@ -42,21 +46,27 @@ public class TableauBordclient {
     public ResponseEntity<?> getDonnes(HttpServletRequest  request) {
         String authorizationHeader = request.getHeader("Authorization");
         String token = authorizationHeader.substring(7);
+
+        if(token.equals(""))ResponseEntity.badRequest();
+
          int id_u=this.jwTservice.extractid_u(token);
          Client cl=this.clientservice.getClient(id_u);
          int id_cp=this.compteservice.getIdcompte(cl);
 
          
         return ResponseEntity.ok(new Tableaureponse(this.clientservice.getNomComplet(id_u),
-        String.valueOf(this.compteservice.getSolde(cl)),String.valueOf(this.compteservice.getNumerocompte(cl)),this.compteservice.gettype(id_cp)));
+        String.valueOf(this.compteservice.getSolde(cl)),
+        String.valueOf(this.compteservice.getNumerocompte(cl)),this.compteservice.gettype(id_cp)));
     
     }
     
     @CrossOrigin
     @PostMapping("/tableau-bord-transactions")
-    public ResponseEntity<List<Transactionsreponse>>getTransactions(HttpServletRequest  request){
-        String authorizationHeader = request.getHeader("Authorization");
-        String token = authorizationHeader.substring(7);
+    public ResponseEntity<?>getTransactions(HttpServletRequest  request){
+
+         String authorizationHeader = request.getHeader("Authorization");
+         String token = authorizationHeader.substring(7);
+         if(token.equals(""))ResponseEntity.badRequest();
 
          int id_u=this.jwTservice.extractid_u(token);
          Client cl=this.clientservice.getClient(id_u);
@@ -66,7 +76,25 @@ public class TableauBordclient {
          return ResponseEntity.ok(this.transactionservice.getList(compte));
          
     }
-   
+
+
+    @CrossOrigin
+    @PostMapping("/courbe-transactions")
+    public ResponseEntity<List<Recordreponse>>getCourbe(HttpServletRequest  request){
+
+         String authorizationHeader = request.getHeader("Authorization");
+         String token = authorizationHeader.substring(7);
+
+         if(token.equals(""))ResponseEntity.badRequest();
+
+         int id_u=this.jwTservice.extractid_u(token);
+         Client cl=this.clientservice.getClient(id_u);
+         int id_cp=this.compteservice.getIdcompte(cl);
+         Compte compte=this.compteservice.getCompte(id_cp);
+         List<Recordreponse>resultat=this.transactionservice.getRecord(compte);
+         
+         return ResponseEntity.ok(resultat);
+    }  
         
     }
     

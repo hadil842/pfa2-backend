@@ -17,5 +17,7 @@ import java.util.List;
 public interface Transactionsrepository extends ListCrudRepository<Transactions, Integer> {
      
     List<Transactions>findByCompte(Compte compte);
+
+    List<Transactions>findByCompteOrderByDateheureAsc(Compte compte);
     
 }

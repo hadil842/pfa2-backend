@@ -22,7 +22,7 @@ public class Transactions {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private int id_tr;
-    private Date date_heure;
+    private Date dateheure;
     private BigDecimal montant;
     private int duree;
     private String localisation;
@@ -45,7 +45,7 @@ public class Transactions {
     public Transactions() {}
 
      Transactions(Date date_heure, BigDecimal montant, int duree, String localisation, String statut,String type_fr) {
-        this.date_heure = date_heure;
+        this.dateheure = date_heure;
         this.montant = montant;
         this.duree = duree;
         this.localisation = localisation;
@@ -59,10 +59,10 @@ public class Transactions {
          this.id_tr = id_tr;
      }
      public Date getDate_heure() {
-         return date_heure;
+         return dateheure;
      }
      public void setDate_heure(Date date_heure) {
-         this.date_heure = date_heure;
+         this.dateheure = date_heure;
      }
      public BigDecimal getMontant() {
          return montant;

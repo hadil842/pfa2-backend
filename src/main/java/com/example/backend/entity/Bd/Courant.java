@@ -12,8 +12,8 @@ public class Courant extends Compte{
     public Courant(){
         super();
     }
-    Courant(int numcompte,Date date_creation, BigDecimal solde,String etat,int  code_secret_compte,Client client){
-        super(numcompte,date_creation,solde,etat,code_secret_compte,client);
+    Courant(int numcompte,Date date_creation, BigDecimal solde,String etat,int  code_secret_compte,Client client,BigDecimal solde_init){
+        super(numcompte,date_creation,solde,etat,code_secret_compte,client, solde_init);
     }
     
 }
