@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 
 public class Virement extends Transactions{
 
-   private int num_compte_rece;
+   private long num_compte_rece;
    private String nom_rece;
 
     public Virement(){super();}
@@ -21,7 +21,7 @@ public class Virement extends Transactions{
         this.num_compte_rece = num_copmte_erce;
     }
 
-    public int getNum_copmte_erce() {
+    public long getNum_copmte_erce() {
         return num_compte_rece;
     }
     public String getNom_rece() {

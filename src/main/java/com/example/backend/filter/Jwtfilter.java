@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
@@ -23,6 +24,10 @@ import jakarta.servlet.http.HttpServletResponse;
 public class Jwtfilter extends OncePerRequestFilter {
     private JWTservice jwtservice ;
 
+    public Jwtfilter(JWTservice jwtservice) {
+        this.jwtservice = jwtservice;
+    }
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         final String authorizationHeader = request.getHeader("Authorization");
@@ -33,11 +38,14 @@ public class Jwtfilter extends OncePerRequestFilter {
                 Claims claims = jwtservice.validateTokenAndGetClaims(token);
                 if (claims != null) {
                     String accessname = claims.getSubject();
-                    List<GrantedAuthority> authorities = new ArrayList<>();
 
-                    UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(accessname, null, authorities);
-                    authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                   List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority("ROLE_USER"));
+    
+                  UsernamePasswordAuthenticationToken authentication = 
+                           new UsernamePasswordAuthenticationToken(accessname, null, authorities);
+         
+                  authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                  SecurityContextHolder.getContext().setAuthentication(authentication);
                 }
             } catch (Exception e) {
                 System.err.println("jwt validation failed: " + e.getMessage());

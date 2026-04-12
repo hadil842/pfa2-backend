@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.backend.entity.Authreponse;
 import com.example.backend.entity.Authrequest;
+
 import com.example.backend.service.JWTservice;
 import com.example.backend.service.Userlogin;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,23 +28,27 @@ public class Logincontroler {
       
     private Userlogin userservice;
     private JWTservice jwtservice;
+   
 
 
 
-    public Logincontroler(Userlogin user,JWTservice jwt){
-        this.jwtservice=jwt;
-        this.userservice=user;
+    public Logincontroler(Userlogin userservice, JWTservice jwtservice) {
+        this.userservice = userservice;
+        this.jwtservice = jwtservice;
+        
     }
+
+    
 
     @CrossOrigin
     @PostMapping("/loginclient")
     public ResponseEntity<?> loginclient(@RequestBody Authrequest request) {
-        Integer id=this.userservice.authenticateClient(request.getNom(),request.getMdp());
+        Integer id_u=this.userservice.authenticateClient(request.getNom(),request.getMdp());
         
-        if(id!=0){
+        if(id_u!=0){
                  
             Map<String,Object>claims=new HashMap<>();
-            claims.put("id",id);
+            claims.put("id_u",id_u);
        
             String jwt=this.jwtservice.createToken(claims,request.getNom());
 
@@ -56,14 +60,13 @@ public class Logincontroler {
     
     @CrossOrigin
     @PostMapping("/loginadmin")
-
     public ResponseEntity<?> loginAdmin (@RequestBody Authrequest request){
 
-        Integer id= this.userservice.authenticateAdmin(request.getNom(),request.getMdp());
+        Integer id_u= this.userservice.authenticateAdmin(request.getNom(),request.getMdp());
     
-        if (id!=0){
+        if (id_u!=0){
             Map<String,Object>claims=new HashMap<>();
-            claims.put("id",id);
+            claims.put("id",id_u);
             String jwt=this.jwtservice.createToken(claims,request.getNom());
             return ResponseEntity.ok(new Authreponse(jwt));}
         else{

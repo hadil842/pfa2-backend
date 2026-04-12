@@ -16,7 +16,7 @@ public class Administrateur extends Utilisateur{
         super();
     }
 
-    Administrateur(String name,String password,String mail,Date date_naiss ,int numer_tel,String nom_complet,String etat_civil ,String grade,int secretcode) {
+    Administrateur(String name,String password,String mail,Date date_naiss ,String numer_tel,String nom_complet,String etat_civil ,String grade,int secretcode) {
         super(name,password,mail,date_naiss,numer_tel,nom_complet,etat_civil);
         this.grade=grade; 
         this.code_secret_admin=secretcode; 

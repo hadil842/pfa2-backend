@@ -22,19 +22,19 @@ public class Compte {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id_cp;
 
-    private int numcompte;
+    private long numcompte;
     private Date date_creation;
     private BigDecimal solde; 
     private String etat;
     private int  code_secret_compte;
 
     @ManyToOne
-    @JoinColumn(name="id_U")
+    @JoinColumn(name="id_u")
     private Client client;
     
     public Compte(){}
     
-    Compte(int numcompte,Date date_creation, BigDecimal solde,String etat,int  code_secret_compte,Client client){
+    Compte(long numcompte,Date date_creation, BigDecimal solde,String etat,int  code_secret_compte,Client client){
         this.numcompte=numcompte;
         this.date_creation=date_creation;
         this.solde=solde;
@@ -47,7 +47,7 @@ public class Compte {
         return id_cp;
     }
 
-    public int getNumcompte() {
+    public long getNumcompte() {
         return numcompte;
     }
 
