@@ -43,8 +43,11 @@ public class Logincontroler {
     @CrossOrigin
     @PostMapping("/loginclient")
     public ResponseEntity<?> loginclient(@RequestBody Authrequest request) {
-        Integer id_u=this.userservice.authenticateClient(request.getNom(),request.getMdp());
-        
+
+        Map<String,Object>dict=this.userservice.authenticateClient(request.getNom(),request.getMdp());
+        int id_u=(int)dict.get("id_u");
+        String etat=String.valueOf(dict.get("etat"));
+
         if(id_u!=0){
                  
             Map<String,Object>claims=new HashMap<>();
@@ -52,7 +55,7 @@ public class Logincontroler {
        
             String jwt=this.jwtservice.createToken(claims,request.getNom());
 
-            return ResponseEntity.ok(new Authreponse(jwt));
+            return ResponseEntity.ok(new Authreponse(jwt,etat));
         }else{
             return  ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
         }
