@@ -23,19 +23,19 @@ public class Compte {
     private int id_cp;
 
     private long numcompte;
-    private Date date_creation;
+    private Date datecreation;
     private BigDecimal solde; 
-    private BigDecimal solde_init; 
+    private BigDecimal soldeinit; 
     public BigDecimal getSolde_init() {
-        return solde_init;
+        return soldeinit;
     }
 
     public void setSolde_init(BigDecimal solde_init) {
-        this.solde_init = solde_init;
+        this.soldeinit = solde_init;
     }
 
     private String etat;
-    private int  code_secret_compte;
+    private int  codesecretcompte;
 
     @ManyToOne
     @JoinColumn(name="id_u")
@@ -45,12 +45,12 @@ public class Compte {
     
     Compte(long numcompte,Date date_creation, BigDecimal solde,String etat,int  code_secret_compte,Client client,BigDecimal s){
         this.numcompte=numcompte;
-        this.date_creation=date_creation;
+        this.datecreation=date_creation;
         this.solde=solde;
         this.etat=etat;
-        this.code_secret_compte=code_secret_compte;
+        this.codesecretcompte=code_secret_compte;
         this.client=client;
-        this.solde_init=s;
+        this.soldeinit=s;
     }
 
     public int getId_cp() {
@@ -62,7 +62,7 @@ public class Compte {
     }
 
     public Date getDate_creation() {
-        return date_creation;
+        return datecreation;
     }
 
     public BigDecimal getSolde() {
@@ -74,7 +74,7 @@ public class Compte {
     }
 
     public int getCode_secret_compte() {
-        return code_secret_compte;
+        return codesecretcompte;
     }
 
     public Client getClient() {
@@ -90,7 +90,7 @@ public class Compte {
     }
 
     public void setDate_creation(Date date_creation) {
-        this.date_creation = date_creation;
+        this.datecreation = date_creation;
     }
 
     public void setSolde(BigDecimal solde) {
@@ -102,7 +102,7 @@ public class Compte {
     }
 
     public void setCode_secret_compte(int code_secret_compte) {
-        this.code_secret_compte = code_secret_compte;
+        this.codesecretcompte = code_secret_compte;
     }
 
     public void setId_U(Client client) {

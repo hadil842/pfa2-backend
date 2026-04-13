@@ -27,7 +27,7 @@ public class Transactions {
     private int duree;
     private String localisation;
     private String statut;
-    private String type_fr = null;
+    private String typefr = null;
 
     @ManyToOne
     @JoinColumn (name="id_admin")
@@ -50,7 +50,7 @@ public class Transactions {
         this.duree = duree;
         this.localisation = localisation;
         this.statut = statut;
-        this.type_fr = type_fr;
+        this.typefr = type_fr;
     }
      public int getId_tr() {
          return id_tr;
@@ -89,10 +89,10 @@ public class Transactions {
          this.statut = statut;
      }
      public String getType_fr() {
-         return type_fr;
+         return typefr;
      }
      public void setType_fr(String type_fr) {
-         this.type_fr = type_fr;
+         this.typefr = type_fr;
      }
     
 }

@@ -10,7 +10,7 @@ import jakarta.persistence.Table;
 public class Administrateur extends Utilisateur{
 
     private String grade; 
-    private int code_secret_admin; 
+    private int codesecretadmin; 
     
     public Administrateur(){
         super();
@@ -19,11 +19,11 @@ public class Administrateur extends Utilisateur{
     Administrateur(String name,String password,String mail,Date date_naiss ,String numer_tel,String nom_complet,String etat_civil ,String grade,int secretcode) {
         super(name,password,mail,date_naiss,numer_tel,nom_complet,etat_civil);
         this.grade=grade; 
-        this.code_secret_admin=secretcode; 
+        this.codesecretadmin=secretcode; 
     }
 
-    public int getSecretCode (){ return this.code_secret_admin;}
-    public void setSecretcode (int secretcode){ this.code_secret_admin=secretcode;}
+    public int getSecretCode (){ return this.codesecretadmin;}
+    public void setSecretcode (int secretcode){ this.codesecretadmin=secretcode;}
     public String getGrade (){ return this.grade;}
     public void setGrade (String grade){ this.grade=grade;}
 }

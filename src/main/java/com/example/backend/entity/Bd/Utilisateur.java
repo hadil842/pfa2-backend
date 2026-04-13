@@ -21,34 +21,34 @@ public class Utilisateur {
     private int id_u;
 
     private String nomaccess;
-    private String mot_de_passe;
+    private String motdepasse;
     private String email;
 
-    private Date date_naiss ;
-    private String numer_tel ;
-    private String nom_complet ; 
-    private String etat_civil ;  
+    private Date datenaiss ;
+    private String numertel ;
+    private String nomcomplet ; 
+    private String etatcivil ;  
 
     public Utilisateur(){}
     
     Utilisateur(String name,String password,String mail,Date date_naiss ,String numer_tel,String nom_complet,String etat_civil ){
         this.nomaccess=name;
-        this.mot_de_passe=password;
+        this.motdepasse=password;
         this.email=mail;
-        this.date_naiss=date_naiss;
-        this.numer_tel=numer_tel;
-        this.nom_complet=nom_complet;
-        this.etat_civil=etat_civil;
+        this.datenaiss=date_naiss;
+        this.numertel=numer_tel;
+        this.nomcomplet=nom_complet;
+        this.etatcivil=etat_civil;
     }
     public int getId(){return this.id_u;}
     public String getAccessname(){return this.nomaccess;}
-    public String getPassword(){return this.mot_de_passe;}
+    public String getPassword(){return this.motdepasse;}
     public String getEmail(){return this.email;}
-    public String getFullname(){return this.nom_complet;}
+    public String getFullname(){return this.nomcomplet;}
 
     public void setId(int ent){this.id_u=ent;}
     public void setAccessname(String nom){this.nomaccess=nom;}
-    public void setPassword(String password){this.mot_de_passe=password;}
+    public void setPassword(String password){this.motdepasse=password;}
     public void setEmail(String mail){ this.email=mail;}
 
 
