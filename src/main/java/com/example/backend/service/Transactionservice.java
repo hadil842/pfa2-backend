@@ -101,9 +101,10 @@ public class Transactionservice {
      for(int i=0;i<table.size();i++){
 
       int id_tr=table.get(i).getId_tr();
-
-      if(this.paiementrepository.existsById(id_tr)||
-       this.virementrepository.existsById(id_tr)||this.depot_especerepository.existsById(id_tr)){
+      boolean check=this.paiementrepository.existsById(id_tr)||
+       this.virementrepository.existsById(id_tr) ||this.retrait_especerepository.existsById(id_tr);
+       
+      if(check){
          if(table.get(i).getStatut().equals("validee")) val_com=val_com.subtract(table.get(i).getMontant());
       }else {
          if(table.get(i).getStatut().equals("validee")) val_com=val_com.add(table.get(i).getMontant());
