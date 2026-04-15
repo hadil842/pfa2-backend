@@ -3,8 +3,7 @@ package com.example.backend.service;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
-
+import java.util.Comparator;
 import java.util.List;
 
 import java.util.Random;
@@ -16,7 +15,7 @@ import com.example.backend.entity.Transactionsreponse;
 import com.example.backend.entity.Bd.Compte;
 
 import com.example.backend.entity.Bd.Transactions;
-
+import com.example.backend.entity.Bd.Virement;
 import com.example.backend.repository.Depot_especerepository;
 import com.example.backend.repository.Paiementrepository;
 import com.example.backend.repository.Retrait_especerepository;
@@ -52,11 +51,38 @@ public class Transactionservice {
       List<Transactions>result=this.transactionrepository.findByCompte(compte);
       List<Transactionsreponse>reponse=new ArrayList<>(20);
     
+     
+      for(Transactions tr :result){
+          reponse.add(redigeTransactions(tr));
+      }
+
+      if(this.virementrepository.existsByNumcompterece(compte.getId_cp())){
+         
+         List<Virement>virements =this.virementrepository.findByNumcompterece(compte.getId_cp());
+
+         for(Virement v:virements){
+            reponse.add(redigeTransactions(v));
+         }
+
+      }
+      return reponse;
+
+   }
+   public String getType(int id_tr){
+        
+        if(this.paiementrepository.existsById(id_tr))return "Paiement "+this.paiementrepository.findById(id_tr).getDestination();
+        else if(this.virementrepository.existsById(id_tr))return "Virement Sortant";
+        else if(this.depot_especerepository.existsById(id_tr))return "Depot Espece";
+        else if(this.retrait_especerepository.existsById(id_tr))return "Retrait Espece";
+        else return "Virement Entrant";
+   }
+
+   public Transactionsreponse redigeTransactions(Transactions tr){
+
       SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
       Random random = new Random();
-      for(Transactions tr :result){
 
-        String date="";
+       String date="";
         if(tr.getDate_heure()!=null)date = sdf.format(tr.getDate_heure());
 
         int id_tr=tr.getId_tr();
@@ -69,31 +95,33 @@ public class Transactionservice {
         String reference="F"+String.valueOf(randomInt)+"-A";
         
         String montant ="";
-        if(type.equals("Depot Espece"))montant+="+";
+        if(type.equals("Depot Espece")||type.equals("Virement Entrant") )montant+="+";
         else montant+="-";
 
         montant+= String.valueOf(tr.getMontant());
 
         String statut=tr.getStatut();
 
-        reponse.add(new Transactionsreponse(date,type,reference,montant,statut));
-      }
-      return reponse;
+        return new Transactionsreponse(date,type,reference,montant,statut);
+   }
 
-   }
-   public String getType(int id_tr){
-        
-        if(this.paiementrepository.existsById(id_tr)){
-              return "Paiement "+this.paiementrepository.findById(id_tr).getDestination();
-        }else if(this.virementrepository.existsById(id_tr))return "Virement";
-        else if(this.depot_especerepository.existsById(id_tr))return "Depot Espece";
-        else return "Retrait Espece";
-   }
+
+
    public List<Recordreponse>getRecord(Compte compte){
 
      List<Recordreponse>resultat=new ArrayList();
 
      List<Transactions>table=this.transactionrepository.findByCompteOrderByDateheureAsc(compte);
+
+     if(this.virementrepository.existsByNumcompterece(compte.getId_cp())){
+         
+         List<Virement>virements =this.virementrepository.findByNumcompterece(compte.getId_cp());
+
+         table.addAll(virements);
+
+         table.sort(Comparator.comparing(Transactions::getDate_heure));
+
+      }
      
      BigDecimal val_com=compte.getSolde_init();
      resultat.add(new Recordreponse(compte.getDate_creation(),val_com));
@@ -101,8 +129,11 @@ public class Transactionservice {
      for(int i=0;i<table.size();i++){
 
       int id_tr=table.get(i).getId_tr();
+      Virement v=this.virementrepository.findById(id_tr);
+
       boolean check=this.paiementrepository.existsById(id_tr)||
-       this.virementrepository.existsById(id_tr) ||this.retrait_especerepository.existsById(id_tr);
+      ( v!=null && compte.getId_cp()!=v.getNum_copmte_erce())
+      ||this.retrait_especerepository.existsById(id_tr);
        
       if(check){
          if(table.get(i).getStatut().equals("validee")) val_com=val_com.subtract(table.get(i).getMontant());
@@ -117,4 +148,5 @@ public class Transactionservice {
      
 
    }
+
 }

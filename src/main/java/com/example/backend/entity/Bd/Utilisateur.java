@@ -18,7 +18,7 @@ import jakarta.persistence.Table;
 public class Utilisateur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_u;
+    private int idu;
 
     private String nomaccess;
     private String motdepasse;
@@ -40,13 +40,13 @@ public class Utilisateur {
         this.nomcomplet=nom_complet;
         this.etatcivil=etat_civil;
     }
-    public int getId(){return this.id_u;}
+    public int getId(){return this.idu;}
     public String getAccessname(){return this.nomaccess;}
     public String getPassword(){return this.motdepasse;}
     public String getEmail(){return this.email;}
     public String getFullname(){return this.nomcomplet;}
 
-    public void setId(int ent){this.id_u=ent;}
+    public void setId(int ent){this.idu=ent;}
     public void setAccessname(String nom){this.nomaccess=nom;}
     public void setPassword(String password){this.motdepasse=password;}
     public void setEmail(String mail){ this.email=mail;}

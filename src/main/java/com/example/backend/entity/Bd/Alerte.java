@@ -14,15 +14,15 @@ import jakarta.persistence.Table;
 public class Alerte {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int id_al;
+    private int idal;
     private Date date ;
 
     @ManyToOne
-    @JoinColumn(name="id_client")
+    @JoinColumn(name="idclient")
     private Client client;
     
     @ManyToOne
-    @JoinColumn(name="id_admin")
+    @JoinColumn(name="idadmin")
     private Administrateur administrateur;
      
     public Alerte() {}
@@ -32,7 +32,7 @@ public class Alerte {
         this.administrateur = administrateur;
     }
     public int getId_al() {
-        return id_al;
+        return idal;
     }
 
     public Date getDate() {

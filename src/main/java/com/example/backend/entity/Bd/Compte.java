@@ -20,7 +20,7 @@ import jakarta.persistence.Table;
 public class Compte {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int id_cp;
+    private int idcp;
 
     private long numcompte;
     private Date datecreation;
@@ -38,7 +38,7 @@ public class Compte {
     private int  codesecretcompte;
 
     @ManyToOne
-    @JoinColumn(name="id_u")
+    @JoinColumn(name="idu")
     private Client client;
     
     public Compte(){}
@@ -54,7 +54,7 @@ public class Compte {
     }
 
     public int getId_cp() {
-        return id_cp;
+        return idcp;
     }
 
     public long getNumcompte() {
@@ -82,7 +82,7 @@ public class Compte {
     }
 
     public void setId_cp(int id_cp) {
-        this.id_cp = id_cp;
+        this.idcp = id_cp;
     }
 
     public void setNumcompte(int numcompte) {

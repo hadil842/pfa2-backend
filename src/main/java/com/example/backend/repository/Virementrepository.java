@@ -18,4 +18,8 @@ public interface Virementrepository extends ListCrudRepository<Virement, Integer
 
 
      List<Virement>findByCompteOrderByDateheureAsc(Compte compte);
+
+     List<Virement>findByNumcompterece(int numero);
+
+     boolean existsByNumcompterece(int numeor);
 }

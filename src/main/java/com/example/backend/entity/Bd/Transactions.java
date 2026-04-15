@@ -21,7 +21,7 @@ public class Transactions {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private int id_tr;
+    private int idtr;
     private Date dateheure;
     private BigDecimal montant;
     private int duree;
@@ -30,13 +30,13 @@ public class Transactions {
     private String typefr = null;
 
     @ManyToOne
-    @JoinColumn (name="id_admin")
+    @JoinColumn (name="idadmin")
     private Administrateur admin=null;
     public void setAdministrateur(Administrateur admin) {this.admin = admin;}
     public Administrateur getAdministrateur() {return admin;}
 
     @ManyToOne
-    @JoinColumn (name="id_cp")
+    @JoinColumn (name="idcp")
     private Compte compte;
     public void setCompte(Compte cp) {this.compte = cp;}
     public Compte getCompte() {return compte;}
@@ -53,10 +53,10 @@ public class Transactions {
         this.typefr = type_fr;
     }
      public int getId_tr() {
-         return id_tr;
+         return idtr;
      }
      public void setId_tr(int id_tr) {
-         this.id_tr = id_tr;
+         this.idtr = id_tr;
      }
      public Date getDate_heure() {
          return dateheure;
