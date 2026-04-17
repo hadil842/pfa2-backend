@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.backend.entity.acceilreponse;
+import com.example.backend.entity.Acceilreponse;
 import com.example.backend.entity.nbstatut;
 import com.example.backend.entity.Bd.Transactions;
 import com.example.backend.repository.Depot_especerepository;
@@ -50,11 +50,11 @@ public class Admintransactionservice {
             return "Virement Entrant";
     }
 
-    public List<acceilreponse> getAllTransactions() {
+    public List<Acceilreponse> getAllTransactions() {
 
         List<Transactions> transactions = transactionrepository.findAllByOrderByDateheureAsc();
 
-        List<acceilreponse> reponses = new ArrayList<>();
+        List<Acceilreponse> reponses = new ArrayList<>();
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
@@ -65,14 +65,14 @@ public class Admintransactionservice {
             BigDecimal solde = t.getMontant();
 
             String date = "";
-            if (t.getDate_heure() != null)
-                date = sdf.format(t.getDate_heure());
+            if (t.getDateheure() != null)
+                date = sdf.format(t.getDateheure());
 
             String type_tr = getType(id);
 
             String statut = t.getStatut();
 
-            acceilreponse r = new acceilreponse(String.valueOf(ncp), type_tr, String.valueOf(solde), date, statut);
+            Acceilreponse r = new Acceilreponse(String.valueOf(ncp), type_tr, String.valueOf(solde), date, statut);
             reponses.add(r);
 
         }

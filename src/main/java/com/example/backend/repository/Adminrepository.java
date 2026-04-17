@@ -10,5 +10,5 @@ import com.example.backend.entity.Bd.Administrateur;
 public interface Adminrepository extends ListCrudRepository<Administrateur, Integer> {
 
     public Administrateur findByNomaccess(String nom);
-    
+    public Administrateur findById(int id_adm);
 }

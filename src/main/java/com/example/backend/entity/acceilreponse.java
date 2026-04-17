@@ -1,13 +1,13 @@
 package com.example.backend.entity;
 
-public class acceilreponse {
+public class Acceilreponse {
     private String numerocompte;
     private String type_tr;
     private String solde;
     private String date;
     private String statut;
 
-    public acceilreponse(String numerocompte, String type_tr, String solde, String date, String statut) {
+    public Acceilreponse(String numerocompte, String type_tr, String solde, String date, String statut) {
         this.numerocompte = numerocompte;
         this.type_tr = type_tr;
         this.solde = solde;

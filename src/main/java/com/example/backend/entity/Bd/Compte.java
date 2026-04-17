@@ -26,6 +26,15 @@ public class Compte {
     private Date datecreation;
     private BigDecimal solde; 
     private BigDecimal soldeinit; 
+    private String causeblocage =" ";
+    public String getCauseblocage() {
+        return causeblocage;
+    }
+
+    public void setCauseblocage(String causeblocage) {
+        this.causeblocage = causeblocage;
+    }
+
     public BigDecimal getSolde_init() {
         return soldeinit;
     }

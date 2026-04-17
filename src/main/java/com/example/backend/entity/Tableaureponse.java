@@ -6,13 +6,13 @@ public class Tableaureponse {
     private String nomcomplet;
     private String solde;
     private String numerocompte;
-    private String type_cp;
+    private String typecp;
     
     public Tableaureponse(String nomcomplet, String solde, String numerocompte,String typecp) {
         this.nomcomplet = nomcomplet;
         this.solde = solde;
         this.numerocompte = numerocompte;
-        this.type_cp=typecp;
+        this.typecp=typecp;
     }
 
     public String getNomcomplet() {
@@ -28,6 +28,6 @@ public class Tableaureponse {
     }
 
     public String getTypecp() {
-        return type_cp;
+        return typecp;
     }
 }

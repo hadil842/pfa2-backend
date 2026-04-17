@@ -44,8 +44,8 @@ public class Transactions {
 
     public Transactions() {}
 
-     Transactions(Date date_heure, BigDecimal montant, int duree, String localisation, String statut,String type_fr) {
-        this.dateheure = date_heure;
+     Transactions(Date dateheure, BigDecimal montant, int duree, String localisation, String statut,String type_fr) {
+        this.dateheure = dateheure;
         this.montant = montant;
         this.duree = duree;
         this.localisation = localisation;
@@ -58,10 +58,10 @@ public class Transactions {
      public void setId_tr(int id_tr) {
          this.idtr = id_tr;
      }
-     public Date getDate_heure() {
+     public Date getDateheure() {
          return dateheure;
      }
-     public void setDate_heure(Date date_heure) {
+     public void setDateheure(Date date_heure) {
          this.dateheure = date_heure;
      }
      public BigDecimal getMontant() {
@@ -88,10 +88,10 @@ public class Transactions {
      public void setStatut(String statut) {
          this.statut = statut;
      }
-     public String getType_fr() {
+     public String getTypefr() {
          return typefr;
      }
-     public void setType_fr(String type_fr) {
+     public void setTypefr(String type_fr) {
          this.typefr = type_fr;
      }
     

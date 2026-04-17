@@ -84,8 +84,8 @@ public class Transactionservice {
       Random random = new Random();
 
       String date = "";
-      if (tr.getDate_heure() != null)
-         date = sdf.format(tr.getDate_heure());
+      if (tr.getDateheure() != null)
+         date = sdf.format(tr.getDateheure());
 
       int id_tr = tr.getId_tr();
 
@@ -119,7 +119,7 @@ public class Transactionservice {
 
          table.addAll(virements);
 
-         table.sort(Comparator.comparing(Transactions::getDate_heure));
+         table.sort(Comparator.comparing(Transactions::getDateheure));
 
       }
 
@@ -142,7 +142,7 @@ public class Transactionservice {
             if (table.get(i).getStatut().equals("validee"))
                val_com = val_com.add(table.get(i).getMontant());
          }
-         resultat.add(new Recordreponse(table.get(i).getDate_heure(), val_com));
+         resultat.add(new Recordreponse(table.get(i).getDateheure(), val_com));
 
       }
 
