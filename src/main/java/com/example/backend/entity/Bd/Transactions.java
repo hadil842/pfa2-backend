@@ -21,7 +21,7 @@ public class Transactions {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private int id_tr;
+    private int idtr;
     private Date dateheure;
     private BigDecimal montant;
     private int duree;
@@ -30,13 +30,13 @@ public class Transactions {
     private String typefr = null;
 
     @ManyToOne
-    @JoinColumn (name="id_admin")
+    @JoinColumn (name="idadmin")
     private Administrateur admin=null;
     public void setAdministrateur(Administrateur admin) {this.admin = admin;}
     public Administrateur getAdministrateur() {return admin;}
 
     @ManyToOne
-    @JoinColumn (name="id_cp")
+    @JoinColumn (name="idcp")
     private Compte compte;
     public void setCompte(Compte cp) {this.compte = cp;}
     public Compte getCompte() {return compte;}
@@ -44,24 +44,24 @@ public class Transactions {
 
     public Transactions() {}
 
-     Transactions(Date date_heure, BigDecimal montant, int duree, String localisation, String statut,String type_fr) {
-        this.dateheure = date_heure;
+     Transactions(Date dateheure, BigDecimal montant, int duree, String localisation, String statut,String type_fr) {
+        this.dateheure = dateheure;
         this.montant = montant;
         this.duree = duree;
         this.localisation = localisation;
         this.statut = statut;
         this.typefr = type_fr;
     }
-     public int getId_tr() {
-         return id_tr;
+     public int getIdtr() {
+         return idtr;
      }
-     public void setId_tr(int id_tr) {
-         this.id_tr = id_tr;
+     public void setIdtr(int idtr) {
+         this.idtr = idtr;
      }
-     public Date getDate_heure() {
+     public Date getDateheure() {
          return dateheure;
      }
-     public void setDate_heure(Date date_heure) {
+     public void setDateheure(Date date_heure) {
          this.dateheure = date_heure;
      }
      public BigDecimal getMontant() {
@@ -88,10 +88,10 @@ public class Transactions {
      public void setStatut(String statut) {
          this.statut = statut;
      }
-     public String getType_fr() {
+     public String getTypefr() {
          return typefr;
      }
-     public void setType_fr(String type_fr) {
+     public void setTypefr(String type_fr) {
          this.typefr = type_fr;
      }
     

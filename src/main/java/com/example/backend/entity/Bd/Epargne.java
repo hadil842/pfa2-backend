@@ -9,15 +9,15 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name="epargne")
 public class Epargne extends Compte {
-    private BigDecimal montant_mensuel;
+    private BigDecimal montantmensuel;
     
     public Epargne(){
         super();
     }
     Epargne(int numcompte,Date date_creation, BigDecimal solde,String etat,int  code_secret_compte,Client client,BigDecimal montant_mensuel,BigDecimal solde_init){
         super(numcompte,date_creation,solde,etat,code_secret_compte,client,solde_init);
-        this.montant_mensuel=montant_mensuel;
+        this.montantmensuel=montant_mensuel;
     }
-    public BigDecimal getMontant_mensuel(){ return this.montant_mensuel;}
-    public void setMontant_mensuel (BigDecimal montant_mensuel){ this.montant_mensuel=montant_mensuel;} 
+    public BigDecimal getMontant_mensuel(){ return this.montantmensuel;}
+    public void setMontant_mensuel (BigDecimal montant_mensuel){ this.montantmensuel=montant_mensuel;} 
 }
