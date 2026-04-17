@@ -60,7 +60,7 @@ public class Admintransactionservice {
 
         for (Transactions t : transactions) {
             int id = t.getId_tr();
-            int ncp = (int) t.getCompte().getNumcompte();
+            long ncp = t.getCompte().getNumcompte();
 
             BigDecimal solde = t.getMontant();
 
