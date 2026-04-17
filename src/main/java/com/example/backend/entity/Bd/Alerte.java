@@ -31,7 +31,7 @@ public class Alerte {
         this.client = client;
         this.administrateur = administrateur;
     }
-    public int getIdal() {
+    public int getId_al() {
         return idal;
     }
 

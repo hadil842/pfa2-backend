@@ -52,11 +52,11 @@ public class Transactions {
         this.statut = statut;
         this.typefr = type_fr;
     }
-     public int getIdtr() {
+     public int getId_tr() {
          return idtr;
      }
-     public void setIdtr(int idtr) {
-         this.idtr = idtr;
+     public void setId_tr(int id_tr) {
+         this.idtr = id_tr;
      }
      public Date getDateheure() {
          return dateheure;

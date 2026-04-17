@@ -5,8 +5,13 @@ import org.springframework.stereotype.Service;
 
 import com.example.backend.entity.Bd.Administrateur;
 import com.example.backend.entity.Bd.Client;
+import com.example.backend.entity.Bd.Compte;
 import com.example.backend.repository.Adminrepository;
 import com.example.backend.repository.Clientrepository;
+import com.example.backend.repository.Compterepository;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Service
@@ -14,26 +19,36 @@ public class Userlogin {
 
     private Clientrepository clientrepo ;
     private Adminrepository adminrepo ;
+    private Compterepository compterepository;
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public Userlogin(Clientrepository client, Adminrepository admin){
+    public Userlogin(Clientrepository client, Adminrepository admin,Compterepository compterepository){
         this.clientrepo=client;
         this.adminrepo=admin;
+        this.compterepository=compterepository;
     }
 
-    public Integer authenticateClient(String nom , String mdp){
+
+    public Map<String,Object> authenticateClient(String nom , String mdp){
         
         Client client=this.clientrepo.findByNomaccess(nom);
-        
+        Compte compte =this.compterepository.findByClient(client);
+
+
         if(client==null){
             System.out.println("error: nom d'utilisateur invalid ");
-            return 0;
+            return null;
         }else{
            if (passwordEncoder.matches(mdp,client.getPassword())) {
-              return client.getId();
+
+              HashMap<String,Object>result=new HashMap<>();
+              result.put("id_u",client.getId());
+              result.put("etat",compte.getEtat());
+              return result;
+              
            } else {
                  System.out.println("error: mot de passe invalid ");
-                 return 0;
+                 return null;
            }
         }
     }
