@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.backend.entity.acceilreponse;
+import com.example.backend.entity.Acceilreponse;
 import com.example.backend.entity.nbstatut;
 import com.example.backend.service.Admintransactionservice;
 
@@ -21,11 +21,13 @@ public class Transactioncontroller {
     public Transactioncontroller(Admintransactionservice tservice) {
         this.tservice = tservice;
     }
+
     @CrossOrigin
     @GetMapping("/afficherTansAdmin")
-    public List<acceilreponse> getTransactions() {
+    public List<Acceilreponse> getTransactions() {
         return tservice.getAllTransactions();
     }
+
     @CrossOrigin
     @GetMapping("/calculer")
     public ResponseEntity<nbstatut> count() {
