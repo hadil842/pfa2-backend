@@ -1,23 +1,28 @@
 package com.example.backend.repository;
 
-
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.ListCrudRepository;
 
 import org.springframework.stereotype.Repository;
 
 import com.example.backend.entity.Bd.Compte;
 import com.example.backend.entity.Bd.Transactions;
+
+import java.math.BigDecimal;
 import java.util.List;
-
-
-
 
 @Repository
 
 public interface Transactionsrepository extends ListCrudRepository<Transactions, Integer> {
-     
-    List<Transactions>findByCompte(Compte compte);
 
-    List<Transactions>findByCompteOrderByDateheureAsc(Compte compte);
-    
+    List<Transactions> findByCompte(Compte compte);
+
+    List<Transactions> findByCompteOrderByDateheureAsc(Compte compte);
+
+    List<Transactions> findAllByOrderByDateheureAsc();
+
+    @Query("SELECT SUM(montant) From Transactions")
+    BigDecimal sumAllMontants();
+
+    int countByStatut(String statut);
 }
