@@ -20,8 +20,9 @@ public class Bolquagecontroler {
      Bolquercompteservice bloqservice;
      JWTservice jwTservice;
 
-    public Bolquagecontroler(Bolquercompteservice bloqservice) {
+    public Bolquagecontroler(Bolquercompteservice bloqservice, JWTservice jwTservice) {
         this.bloqservice = bloqservice;
+        this.jwTservice = jwTservice;
     }
 
    @PostMapping("/bloquercompte")
@@ -32,7 +33,8 @@ public class Bolquagecontroler {
         if(token.equals(""))ResponseEntity.badRequest();
 
          int id_u=this.jwTservice.extractid_u(token);
-         return ResponseEntity.ok(this.bloqservice.bloquercompte(bloc.getId_cp(),id_u, bloc.getCodesecret(), bloc.getCause()));
+         
+         return ResponseEntity.ok(this.bloqservice.bloquercompte(bloc.getNumcompte(),id_u, bloc.getCodesecret(), bloc.getCause()));
    }
 
    @PostMapping("/debloquercompte")
@@ -43,7 +45,7 @@ public class Bolquagecontroler {
         if(token.equals(""))ResponseEntity.badRequest();
 
          int id_u=this.jwTservice.extractid_u(token);
-         return ResponseEntity.ok(this.bloqservice.debloquercompte(bloc.getId_cp(),id_u, bloc.getCodesecret(), bloc.getCause()));
+         return ResponseEntity.ok(this.bloqservice.debloquercompte(bloc.getNumcompte(),id_u, bloc.getCodesecret(), bloc.getCause()));
    }
 
 

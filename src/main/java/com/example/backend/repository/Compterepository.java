@@ -16,4 +16,6 @@ public interface Compterepository extends ListCrudRepository<Compte, Integer>{
     Compte findByClient(Client cl);
 
     Compte findById(int id_cp);
+
+    Compte findByNumcompte(long numcompte);
 }

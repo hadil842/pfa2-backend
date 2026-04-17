@@ -38,8 +38,6 @@ public class Logincontroler {
         
     }
 
-    
-
     @CrossOrigin
     @PostMapping("/loginclient")
     public ResponseEntity<?> loginclient(@RequestBody Authrequest request) {
@@ -69,7 +67,7 @@ public class Logincontroler {
     
         if (id_u!=0){
             Map<String,Object>claims=new HashMap<>();
-            claims.put("id",id_u);
+            claims.put("id_u",id_u);
             String jwt=this.jwtservice.createToken(claims,request.getNom());
             return ResponseEntity.ok(new Authreponse(jwt));}
         else{

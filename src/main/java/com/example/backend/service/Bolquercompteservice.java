@@ -19,14 +19,19 @@ public class Bolquercompteservice {
         this.compterepository = compterepository;
     }
 
-    public String bloquercompte(int id_cp, int id_adm, int codesecret,String cause){
+    public String bloquercompte(long numcp, int id_adm, int codesecret,String cause){
         Administrateur admin =this.admirespository.findById(id_adm); 
         if(admin.getSecretCode()==codesecret){
-            Compte cp=this.compterepository.findById(id_cp);
-            if (cp==null){return "Compte non trouvé";}
+            Compte cp=this.compterepository.findByNumcompte(numcp);
+
+            if (cp==null){
+                return "Compte non trouvé";}
+
             cp.setEtat("bloqué");
             cp.setCauseblocage(cause);
+
             this.compterepository.save(cp);
+
             return "Compte bloqué";
         }
         else {
@@ -35,13 +40,18 @@ public class Bolquercompteservice {
 
     } 
 
-    public String debloquercompte(int id_cp, int id_adm, int codesecret,String cause){
+    public String debloquercompte(long numcp, int id_adm, int codesecret,String cause){
+
         Administrateur admin =this.admirespository.findById(id_adm); 
+
         if(admin.getSecretCode()==codesecret){
-            Compte cp=this.compterepository.findById(id_cp);
+
+            Compte cp=this.compterepository.findByNumcompte(numcp);
             if (cp==null){return "Compte non trouvé";}
+
             cp.setEtat("actif");
             cp.setCauseblocage(cause);
+            
             this.compterepository.save(cp);
             return "Compte debloqué";
         }

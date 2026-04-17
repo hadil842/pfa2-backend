@@ -3,7 +3,7 @@ package com.example.backend.entity;
 public class Demandebloquage {
     
     int codesecret;
-    int idcp;
+    long numcompte;
     String cause;
     
     public String getCause() {
@@ -13,23 +13,26 @@ public class Demandebloquage {
         this.cause = cause;
     }
 
-    public int getId_cp() {
-        return idcp;
+    public long getNumcompte() {
+        return numcompte;   
     }
-    public void setId_cp(int id_cp) {
-        this.idcp = id_cp;
+
+    public void setNumcompte(long numcompte) {
+        this.numcompte = numcompte;
     }
+
     public int getCodesecret() {
         return codesecret;
     }
+    
     public void setCodesecret(int codesecret) {
         this.codesecret = codesecret;
     }
     
-    public Demandebloquage(String cause, int codesecret, int id_cp) {
+    public Demandebloquage(String cause, int codesecret, long numcompte) {
         this.cause = cause;
         this.codesecret = codesecret;
-        this.idcp = id_cp;
+        this.numcompte = numcompte;
     }
 
 }
