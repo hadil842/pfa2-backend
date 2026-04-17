@@ -21,19 +21,25 @@ import com.example.backend.filter.Jwtfilter;
 @Configuration
 
 public class Securityconfig {
-     @Bean
-   public PasswordEncoder passwordEncoder(){
-       return new BCryptPasswordEncoder();
-   }
-   @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+            throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
-    @Bean 
-    public SecurityFilterChain securityFilterChain(HttpSecurity http,@Autowired  Jwtfilter jwtf)throws Exception{
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, @Autowired Jwtfilter jwtf) throws Exception {
         http.csrf(csrf -> csrf.disable()).cors(Customizer.withDefaults())
-        .authorizeHttpRequests(authorize ->authorize.requestMatchers("/loginclient","/loginadmin","/error").permitAll().anyRequest().authenticated())
-        .sessionManagement(session ->session .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/loginclient", "/loginadmin", "/error", "/afficherTansAdmin", "/calculer")
+                        .permitAll()
+                        .anyRequest().authenticated())
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.addFilterBefore(jwtf, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }

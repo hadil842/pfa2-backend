@@ -1,6 +1,5 @@
 package com.example.backend.controller;
 
-
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.backend.entity.Authreponse;
@@ -17,64 +16,58 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-
-
-
-
-
-@CrossOrigin(origins = {"http://localhost:4200", "null", "http://localhost:9090"})
+@CrossOrigin(origins = { "http://localhost:4200", "null", "http://localhost:9090" })
 @RestController
 public class Logincontroler {
-      
+
     private Userlogin userservice;
     private JWTservice jwtservice;
-   
-
-
 
     public Logincontroler(Userlogin userservice, JWTservice jwtservice) {
         this.userservice = userservice;
         this.jwtservice = jwtservice;
-        
-    }
 
-    
+    }
 
     @CrossOrigin
     @PostMapping("/loginclient")
     public ResponseEntity<?> loginclient(@RequestBody Authrequest request) {
 
-        Map<String,Object>dict=this.userservice.authenticateClient(request.getNom(),request.getMdp());
-        int id_u=(int)dict.get("id_u");
-        String etat=String.valueOf(dict.get("etat"));
+        Map<String, Object> dict = this.userservice.authenticateClient(request.getNom(), request.getMdp());
 
-        if(id_u!=0){
-                 
-            Map<String,Object>claims=new HashMap<>();
-            claims.put("id_u",id_u);
-       
-            String jwt=this.jwtservice.createToken(claims,request.getNom());
+        if (dict == null)
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Nom utilisateur invalide");
 
-            return ResponseEntity.ok(new Authreponse(jwt,etat));
-        }else{
-            return  ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
-        }
-    }
-    
-    @CrossOrigin
-    @PostMapping("/loginadmin")
-    public ResponseEntity<?> loginAdmin (@RequestBody Authrequest request){
+        int id_u = (int) dict.get("id_u");
+        String etat = String.valueOf(dict.get("etat"));
 
-        Integer id_u= this.userservice.authenticateAdmin(request.getNom(),request.getMdp());
-    
-        if (id_u!=0){
-            Map<String,Object>claims=new HashMap<>();
-            claims.put("id",id_u);
-            String jwt=this.jwtservice.createToken(claims,request.getNom());
-            return ResponseEntity.ok(new Authreponse(jwt));}
-        else{
+        if (id_u != 0) {
+
+            Map<String, Object> claims = new HashMap<>();
+            claims.put("id_u", id_u);
+
+            String jwt = this.jwtservice.createToken(claims, request.getNom());
+
+            return ResponseEntity.ok(new Authreponse(jwt, etat));
+        } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
         }
     }
-    
+
+    @CrossOrigin
+    @PostMapping("/loginadmin")
+    public ResponseEntity<?> loginAdmin(@RequestBody Authrequest request) {
+
+        Integer id_u = this.userservice.authenticateAdmin(request.getNom(), request.getMdp());
+
+        if (id_u != 0) {
+            Map<String, Object> claims = new HashMap<>();
+            claims.put("id", id_u);
+            String jwt = this.jwtservice.createToken(claims, request.getNom());
+            return ResponseEntity.ok(new Authreponse(jwt));
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+        }
+    }
+
 }
