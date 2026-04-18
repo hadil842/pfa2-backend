@@ -27,15 +27,7 @@ public class Transactionsreponse {
         return type;
     }
 
-    private String reference;
-    public String getReference() {
-        return reference;
-    }
-
-    public void setReference(String reference) {
-        this.reference = reference;
-    }
-
+   
     private String montant ;
 
     public String getMontatnt() {
@@ -46,10 +38,10 @@ public class Transactionsreponse {
         this.montant = montatnt;
     }
 
-    public Transactionsreponse(String date, String type, String reference, String montatnt,String statut) {
+    public Transactionsreponse(String date, String type, String montatnt,String statut) {
         this.date = date;
         this.type = type;
-        this.reference = reference;
+       
         this.montant = montatnt;
         this.statut=statut;
     }

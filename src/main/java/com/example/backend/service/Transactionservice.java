@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import java.util.Random;
+
 
 import org.springframework.stereotype.Service;
 
@@ -81,7 +81,7 @@ public class Transactionservice {
    public Transactionsreponse redigeTransactions(Transactions tr) {
 
       SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-      Random random = new Random();
+     
 
       String date = "";
       if (tr.getDateheure() != null)
@@ -91,8 +91,7 @@ public class Transactionservice {
 
       String type = getType(id_tr);
 
-      int randomInt = random.nextInt(1000);
-      String reference = "F" + String.valueOf(randomInt) + "-A";
+     
 
       String montant = "";
       if (type.equals("Depot Espece") || type.equals("Virement Entrant"))
@@ -104,12 +103,12 @@ public class Transactionservice {
 
       String statut = tr.getStatut();
 
-      return new Transactionsreponse(date, type, reference, montant, statut);
+      return new Transactionsreponse(date, type, montant, statut);
    }
 
    public List<Recordreponse> getRecord(Compte compte) {
 
-      List<Recordreponse> resultat = new ArrayList();
+      List<Recordreponse> resultat = new ArrayList<>();
 
       List<Transactions> table = this.transactionrepository.findByCompteOrderByDateheureAsc(compte);
 
