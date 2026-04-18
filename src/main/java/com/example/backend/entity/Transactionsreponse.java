@@ -5,7 +5,16 @@ package com.example.backend.entity;
 public class Transactionsreponse {
     private String date ;
     private String statut;
+    private String localisation;
     
+    public String getLocalisation() {
+        return localisation;
+    }
+
+    public void setLocalisation(String localisation) {
+        this.localisation = localisation;
+    }
+
     public String getStatut() {
         return statut;
     }
@@ -38,10 +47,10 @@ public class Transactionsreponse {
         this.montant = montatnt;
     }
 
-    public Transactionsreponse(String date, String type, String montatnt,String statut) {
+    public Transactionsreponse(String date, String type, String montatnt,String statut,String localisation) {
         this.date = date;
         this.type = type;
-       
+        this.localisation=localisation;
         this.montant = montatnt;
         this.statut=statut;
     }

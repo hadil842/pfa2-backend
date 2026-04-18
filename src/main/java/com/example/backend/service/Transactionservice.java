@@ -102,8 +102,9 @@ public class Transactionservice {
       montant += String.valueOf(tr.getMontant());
 
       String statut = tr.getStatut();
+      String localisation=tr.getLocalisation();
 
-      return new Transactionsreponse(date, type, montant, statut);
+      return new Transactionsreponse(date, type, montant, statut,localisation);
    }
 
    public List<Recordreponse> getRecord(Compte compte) {
