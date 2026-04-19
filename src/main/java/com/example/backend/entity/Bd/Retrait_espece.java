@@ -13,7 +13,7 @@ public class Retrait_espece extends Transactions {
 
     public Retrait_espece(){super();}
 
-    Retrait_espece( Date date_heure, BigDecimal montant, int duree, String localisation, String statut,String type_fr) {
-        super( date_heure, montant, duree, localisation, statut, type_fr);}
+    Retrait_espece( Date date_heure, BigDecimal montant, int duree, String localisation, String statut,int type_fr,BigDecimal dp) {
+        super( date_heure, montant, duree, localisation, statut, type_fr,dp);} 
    
 }

@@ -11,12 +11,12 @@ import jakarta.persistence.Table;
 public class Client extends Utilisateur{
 
     String profession; 
-    BigDecimal salaire; 
+    BigDecimal salaire;
 
     public Client(){super();}
 
-    Client( String name,String password,String mail,Date date_naiss ,String numer_tel,String nom_complet,String etat_civil,String profession,BigDecimal salary  ) {
-        super(name,password,mail,date_naiss,numer_tel,nom_complet,etat_civil);
+    Client( String name,String password,String mail,Date date_naiss ,String numer_tel,String nom_complet,String etat_civil,String profession,BigDecimal salary,int sc  ) {
+        super(name,password,mail,date_naiss,numer_tel,nom_complet,etat_civil,sc);
         this.profession = profession; 
         this.salaire=salary; 
     }

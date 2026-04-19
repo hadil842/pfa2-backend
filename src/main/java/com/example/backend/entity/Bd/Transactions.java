@@ -27,7 +27,14 @@ public class Transactions {
     private int duree;
     private String localisation;
     private String statut;
-    private String typefr = null;
+    private Integer typefr;
+    private BigDecimal adrsipscr;
+    public BigDecimal getAdrsipscr() {
+        return adrsipscr;
+    }
+    public void setAdrsipscr(BigDecimal adrsipscr) {
+        this.adrsipscr = adrsipscr;
+    }
 
     @ManyToOne
     @JoinColumn (name="idadmin")
@@ -44,13 +51,14 @@ public class Transactions {
 
     public Transactions() {}
 
-     Transactions(Date dateheure, BigDecimal montant, int duree, String localisation, String statut,String type_fr) {
+     Transactions(Date dateheure, BigDecimal montant, int duree, String localisation, String statut,Integer type_fr,BigDecimal val) {
         this.dateheure = dateheure;
         this.montant = montant;
         this.duree = duree;
         this.localisation = localisation;
         this.statut = statut;
         this.typefr = type_fr;
+        this.adrsipscr=val;
     }
      public int getId_tr() {
          return idtr;
@@ -88,10 +96,10 @@ public class Transactions {
      public void setStatut(String statut) {
          this.statut = statut;
      }
-     public String getTypefr() {
+     public Integer getTypefr() {
          return typefr;
      }
-     public void setTypefr(String type_fr) {
+     public void setTypefr(Integer type_fr) {
          this.typefr = type_fr;
      }
     

@@ -15,8 +15,8 @@ public class Virement extends Transactions{
    private String nomrece;
 
     public Virement(){super();}
-    Virement( Date date_heure, BigDecimal montant, int duree, String localisation, String statut,String type_fr, String nom_rece, int num_copmte_erce) {
-        super( date_heure, montant, duree, localisation, statut, type_fr);
+    Virement( Date date_heure, BigDecimal montant, int duree, String localisation, String statut,int type_fr, String nom_rece, int num_copmte_erce,BigDecimal dp) {
+        super( date_heure, montant, duree, localisation, statut, type_fr,dp);
         this.nomrece = nom_rece;
         this.numcompterece = num_copmte_erce;
     }
