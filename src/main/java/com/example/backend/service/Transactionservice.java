@@ -10,12 +10,12 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.backend.entity.Recordreponse;
-import com.example.backend.entity.Transactionsreponse;
-import com.example.backend.entity.Bd.Compte;
+import com.example.backend.DTO.Recordreponse;
+import com.example.backend.DTO.Transactionsreponse;
+import com.example.backend.entity.Compte;
 
-import com.example.backend.entity.Bd.Transactions;
-import com.example.backend.entity.Bd.Virement;
+import com.example.backend.entity.Transactions;
+import com.example.backend.entity.Virement;
 import com.example.backend.repository.Depot_especerepository;
 import com.example.backend.repository.Paiementrepository;
 import com.example.backend.repository.Retrait_especerepository;

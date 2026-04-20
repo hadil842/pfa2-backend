@@ -8,9 +8,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.backend.entity.Acceilreponse;
-import com.example.backend.entity.Nbstatut;
-import com.example.backend.entity.Bd.Transactions;
+import com.example.backend.DTO.Acceilreponse;
+import com.example.backend.DTO.Nbstatut;
+import com.example.backend.entity.Transactions;
 import com.example.backend.repository.Depot_especerepository;
 import com.example.backend.repository.Paiementrepository;
 import com.example.backend.repository.Retrait_especerepository;

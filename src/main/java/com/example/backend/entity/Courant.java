@@ -1,4 +1,4 @@
-package com.example.backend.entity.Bd;
+package com.example.backend.entity;
 
 import java.math.BigDecimal;
 import java.util.Date;
