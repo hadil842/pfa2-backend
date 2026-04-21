@@ -13,5 +13,7 @@ import com.example.backend.entity.Bd.Utilisateur;
 public interface Utilisateurrepository extends ListCrudRepository<Utilisateur, Integer> {
     
     Utilisateur findById(int id);
+    Utilisateur findByNomaccess(String nomaccess);
+    Utilisateur findByVerificationToken(String token);
 }  
 

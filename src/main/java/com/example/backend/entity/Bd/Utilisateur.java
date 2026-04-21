@@ -2,6 +2,7 @@ package com.example.backend.entity.Bd;
 
 import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,7 +23,20 @@ public class Utilisateur {
 
     private String nomaccess;
     private String motdepasse;
+
+    @Column(nullable = false, unique = true)
     private String email;
+    private String verificationToken;
+    public String getVerificationToken() {
+        return verificationToken;
+    }
+
+    public void setVerificationToken(String verificationToken) {
+        this.verificationToken = verificationToken;
+    }
+    @Column(nullable = false)
+    private boolean enabled;
+
 
     private Date datenaiss ;
     private String numertel ;
@@ -40,6 +54,7 @@ public class Utilisateur {
         this.nomcomplet=nom_complet;
         this.etatcivil=etat_civil;
     }
+
     public int getId(){return this.idu;}
     public String getAccessname(){return this.nomaccess;}
     public String getPassword(){return this.motdepasse;}
