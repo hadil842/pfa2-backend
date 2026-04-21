@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -27,6 +27,7 @@ public class Compte {
     private BigDecimal solde; 
     private BigDecimal soldeinit; 
     private String causeblocage =" ";
+
     public String getCauseblocage() {
         return causeblocage;
     }
@@ -55,7 +56,7 @@ public class Compte {
         this.depencemoy = depencemoy;
     }
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name="idu")
     private Client client;
     

@@ -26,17 +26,6 @@ public class Utilisateur {
 
     @Column(nullable = false, unique = true)
     private String email;
-    private String verificationToken;
-    public String getVerificationToken() {
-        return verificationToken;
-    }
-
-    public void setVerificationToken(String verificationToken) {
-        this.verificationToken = verificationToken;
-    }
-    @Column(nullable = false)
-    private boolean enabled;
-
 
     private Date datenaiss ;
     private String numertel ;
