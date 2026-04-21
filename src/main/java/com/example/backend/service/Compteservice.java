@@ -4,8 +4,8 @@ import java.math.BigDecimal;
 
 import org.springframework.stereotype.Service;
 
-import com.example.backend.entity.Bd.Client;
-import com.example.backend.entity.Bd.Compte;
+import com.example.backend.entity.Client;
+import com.example.backend.entity.Compte;
 import com.example.backend.repository.Clientrepository;
 import com.example.backend.repository.Compterepository;
 import com.example.backend.repository.Courantrepository;

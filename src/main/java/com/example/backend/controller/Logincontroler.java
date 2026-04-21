@@ -2,8 +2,8 @@ package com.example.backend.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.backend.entity.Authreponse;
-import com.example.backend.entity.Authrequest;
+import com.example.backend.DTO.Authreponse;
+import com.example.backend.DTO.Authrequest;
 
 import com.example.backend.service.JWTservice;
 import com.example.backend.service.Userlogin;

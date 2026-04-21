@@ -1,4 +1,4 @@
-package com.example.backend.entity.Bd;
+package com.example.backend.entity;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -45,6 +45,15 @@ public class Compte {
 
     private String etat;
     private int  codesecretcompte;
+    private BigDecimal depencemoy;
+
+    public BigDecimal getDepencemoy() {
+        return depencemoy;
+    }
+
+    public void setDepencemoy(BigDecimal depencemoy) {
+        this.depencemoy = depencemoy;
+    }
 
     @ManyToOne
     @JoinColumn(name="idu")
@@ -52,7 +61,7 @@ public class Compte {
     
     public Compte(){}
     
-    Compte(long numcompte,Date date_creation, BigDecimal solde,String etat,int  code_secret_compte,Client client,BigDecimal s){
+    Compte(long numcompte,Date date_creation, BigDecimal solde,String etat,int  code_secret_compte,Client client,BigDecimal s,BigDecimal dep){
         this.numcompte=numcompte;
         this.datecreation=date_creation;
         this.solde=solde;
@@ -60,6 +69,7 @@ public class Compte {
         this.codesecretcompte=code_secret_compte;
         this.client=client;
         this.soldeinit=s;
+        this.depencemoy=dep;
     }
 
     public int getId_cp() {

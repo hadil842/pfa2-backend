@@ -3,9 +3,9 @@ package com.example.backend.service;
 
 import org.springframework.stereotype.Service;
 
-import com.example.backend.entity.Bd.Administrateur;
-import com.example.backend.entity.Bd.Client;
-import com.example.backend.entity.Bd.Compte;
+import com.example.backend.entity.Administrateur;
+import com.example.backend.entity.Client;
+import com.example.backend.entity.Compte;
 import com.example.backend.repository.Adminrepository;
 import com.example.backend.repository.Clientrepository;
 import com.example.backend.repository.Compterepository;

@@ -5,7 +5,7 @@ import org.springframework.data.repository.ListCrudRepository;
 
 import org.springframework.stereotype.Repository;
 
-import com.example.backend.entity.Bd.Epargne;
+import com.example.backend.entity.Epargne;
 
 
 

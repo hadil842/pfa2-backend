@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.backend.entity.Recordreponse;
-import com.example.backend.entity.Tableaureponse;
+import com.example.backend.DTO.Recordreponse;
+import com.example.backend.DTO.Tableaureponse;
 
-import com.example.backend.entity.Bd.Client;
-import com.example.backend.entity.Bd.Compte;
+import com.example.backend.entity.Client;
+import com.example.backend.entity.Compte;
 import com.example.backend.service.Clientservice;
 import com.example.backend.service.Compteservice;
 import com.example.backend.service.JWTservice;

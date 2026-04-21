@@ -1,4 +1,4 @@
-package com.example.backend.entity.Bd;
+package com.example.backend.entity;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -14,8 +14,8 @@ public class Paiement extends Transactions{
     
     public Paiement(){super();}
     
-    Paiement( Date date_heure, BigDecimal montant, int duree, String localisation, String statut,String type_fr, String destination) {
-        super( date_heure, montant, duree, localisation, statut, type_fr);
+    Paiement( Date date_heure, BigDecimal montant, int duree, String localisation, String statut,int type_fr, String destination,BigDecimal dp) {
+        super( date_heure, montant, duree, localisation, statut, type_fr,dp);
         this.destination = destination;}
 
     public String getDestination() {

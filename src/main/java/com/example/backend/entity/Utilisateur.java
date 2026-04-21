@@ -1,4 +1,4 @@
-package com.example.backend.entity.Bd;
+package com.example.backend.entity;
 
 import java.util.Date;
 
@@ -41,11 +41,20 @@ public class Utilisateur {
     private Date datenaiss ;
     private String numertel ;
     private String nomcomplet ; 
-    private String etatcivil ;  
+    private String etatcivil ;
+    private Integer scorecredit;  
+
+    public Integer getScorecredit() {
+        return scorecredit;
+    }
+
+    public void setScorecredit(Integer scorecredit) {
+        this.scorecredit = scorecredit;
+    }
 
     public Utilisateur(){}
     
-    Utilisateur(String name,String password,String mail,Date date_naiss ,String numer_tel,String nom_complet,String etat_civil ){
+    Utilisateur(String name,String password,String mail,Date date_naiss ,String numer_tel,String nom_complet,String etat_civil ,int sc){
         this.nomaccess=name;
         this.motdepasse=password;
         this.email=mail;
@@ -53,6 +62,7 @@ public class Utilisateur {
         this.numertel=numer_tel;
         this.nomcomplet=nom_complet;
         this.etatcivil=etat_civil;
+        this.scorecredit=sc;
     }
 
     public int getId(){return this.idu;}
