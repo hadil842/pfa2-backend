@@ -1,4 +1,5 @@
 package com.example.backend.entity;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import jakarta.persistence.Entity;
@@ -15,7 +16,14 @@ public class Alerte {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int idal;
-    private Date date ;
+    private LocalDateTime date ;
+    private String cause;
+    public String getCause() {
+        return cause;
+    }
+    public void setCause(String cause) {
+        this.cause = cause;
+    }
 
     @ManyToOne
     @JoinColumn(name="idclient")
@@ -26,20 +34,21 @@ public class Alerte {
     private Administrateur administrateur;
      
     public Alerte() {}
-    public Alerte(Date date, Client client, Administrateur administrateur) {
+    public Alerte(LocalDateTime date, Client client, Administrateur administrateur,String cause) {
         this.date = date;
         this.client = client;
         this.administrateur = administrateur;
+        this.cause=cause;
     }
     public int getId_al() {
         return idal;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

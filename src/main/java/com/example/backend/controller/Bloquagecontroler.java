@@ -17,8 +17,8 @@ import jakarta.servlet.http.HttpServletRequest;
 
 public class Bloquagecontroler {
 
-     Bolquercompteservice bloqservice;
-     JWTservice jwTservice;
+     private Bolquercompteservice bloqservice;
+     private JWTservice jwTservice;
 
     public Bloquagecontroler(Bolquercompteservice bloqservice, JWTservice jwTservice) {
         this.bloqservice = bloqservice;
