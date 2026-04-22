@@ -42,15 +42,18 @@ public class Verificationservice {
 
     }
 
-    public boolean verifierCode(int id_u,int cd){
+    public String verifierCode(int id_u,int cd){
 
          Utilisateur utili=this.utilirepo.findById(id_u);
 
          Code code=this.coderepo.findByUtilisateur(utili);
 
-         if(code.getCode()==cd)return true;
-         else return false;
-
+        if(LocalDateTime.now().isBefore(code.getDate())){
+            if(code.getCode()==cd)return "code correct";
+            else return "code incorrect";
+        }else{
+            return "code expire";
+        }
     }
          
 } 
