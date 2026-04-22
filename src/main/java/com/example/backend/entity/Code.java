@@ -23,6 +23,9 @@ public class Code {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int idc;
 
+    public Code() {
+    }
+
     public int getIdc() {
         return idc;
     }

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+
 import org.springframework.stereotype.Service;
 
 
@@ -25,10 +26,10 @@ public class JWTservice {
         return createToken(claims, email);
     }
 
-    public String createToken(Map<String, Object> claims, String  accessname) {
+    public String createToken(Map<String, Object> claims, String  id_u) {
         return Jwts.builder()
                 .setClaims(claims)
-                .setSubject(accessname)
+                .setSubject(id_u)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() +3600000))
                 .signWith(getSignKey(), SignatureAlgorithm.HS256)
@@ -79,4 +80,9 @@ public class JWTservice {
             return null;
         }
     }
+    public String getSubjectFromToken(String token) {
+        
+       Claims claims =extractAllClaims(token);
+       return claims.getSubject(); 
+}
 }

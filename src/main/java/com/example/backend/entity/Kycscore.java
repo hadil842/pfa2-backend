@@ -20,8 +20,32 @@ public class Kycscore {
     private int idkysc;
 
     private int valeur;
+    public int getValeur() {
+        return valeur;
+    }
+
+    public void setValeur(int valeur) {
+        this.valeur = valeur;
+    }
+
     private Date datecalcul;
+    public Date getDatecalcul() {
+        return datecalcul;
+    }
+
+    public void setDatecalcul(Date datecalcul) {
+        this.datecalcul = datecalcul;
+    }
+
     private Date dateprochaine;
+
+    public Date getDateprochaine() {
+        return dateprochaine;
+    }
+
+    public void setDateprochaine(Date dateprochaine) {
+        this.dateprochaine = dateprochaine;
+    }
 
     public Kycscore(int idkysc, int valeur, Date datecalcul, Date dateprochaine, Client client) {
         this.idkysc = idkysc;

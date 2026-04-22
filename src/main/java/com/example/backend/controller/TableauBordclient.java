@@ -67,7 +67,7 @@ public class TableauBordclient {
          String token = authorizationHeader.substring(7);
          if(token.equals(""))ResponseEntity.badRequest();
 
-         int id_u=this.jwTservice.extractid_u(token);
+         int id_u=Integer.parseInt(this.jwTservice.getSubjectFromToken(token));
          Client cl=this.clientservice.getClient(id_u);
          int id_cp=this.compteservice.getIdcompte(cl);
          Compte compte=this.compteservice.getCompte(id_cp);
@@ -86,7 +86,7 @@ public class TableauBordclient {
 
          if(token.equals(""))ResponseEntity.badRequest();
 
-         int id_u=this.jwTservice.extractid_u(token);
+        int id_u=Integer.parseInt(this.jwTservice.getSubjectFromToken(token));
          Client cl=this.clientservice.getClient(id_u);
          int id_cp=this.compteservice.getIdcompte(cl);
          Compte compte=this.compteservice.getCompte(id_cp);

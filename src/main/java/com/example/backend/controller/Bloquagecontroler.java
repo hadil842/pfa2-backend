@@ -32,7 +32,7 @@ public class Bloquagecontroler {
 
         if(token.equals(""))ResponseEntity.badRequest();
 
-         int id_u=this.jwTservice.extractid_u(token);
+         int id_u=Integer.parseInt(this.jwTservice.getSubjectFromToken(token));
          
          return ResponseEntity.ok(this.bloqservice.bloquercompte(bloc.getNumcompte(),id_u, bloc.getCodesecret(), bloc.getCause()));
    }
@@ -44,7 +44,7 @@ public class Bloquagecontroler {
 
         if(token.equals(""))ResponseEntity.badRequest();
 
-         int id_u=this.jwTservice.extractid_u(token);
+         int id_u=Integer.parseInt(this.jwTservice.getSubjectFromToken(token));
          return ResponseEntity.ok(this.bloqservice.debloquercompte(bloc.getNumcompte(),id_u, bloc.getCodesecret(), bloc.getCause()));
    }
 

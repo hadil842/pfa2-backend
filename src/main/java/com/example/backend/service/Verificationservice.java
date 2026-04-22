@@ -34,10 +34,16 @@ public class Verificationservice {
 
         Utilisateur utili=this.utilirepo.findById(id_u);
 
-        Code code=new Code(cd, LocalDateTime.now().plusMinutes(15),utili);
 
-        this.coderepo.save(code);
+        Code code=this.coderepo.findByUtilisateur(utili);
 
+        if(code==null){
+            code=new Code(cd, LocalDateTime.now().plusMinutes(15),utili);
+        }else{
+            code.setCode(cd);
+            code.setDate( LocalDateTime.now().plusMinutes(15));
+        }
+        this.coderepo.save(code); 
         return cd;
 
     }

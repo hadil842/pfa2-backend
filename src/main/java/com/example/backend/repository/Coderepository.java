@@ -13,4 +13,7 @@ public interface Coderepository extends ListCrudRepository<Code,Integer>{
     Code save(Code code);
 
     Code findByUtilisateur(Utilisateur utili);
+
+
+    boolean existsByUtilisateur(Utilisateur utili);
 }
