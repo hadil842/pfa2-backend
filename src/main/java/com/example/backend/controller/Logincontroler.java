@@ -89,20 +89,41 @@ public class Logincontroler {
 
 
 
-    /*@CrossOrigin
+    @CrossOrigin
     @PostMapping("/loginadmin")
     public ResponseEntity<?> loginAdmin(@RequestBody Authrequest request) {
 
-        Integer id_u = this.userservice.authenticateAdmin(request.getNom(), request.getMdp());
+       int id_u = this.userservice.authenticateAdmin(request.getNom(), request.getMdp());
+
+        if (id_u == 0)
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Nom administrateur invalide");
 
         if (id_u != 0) {
-            Map<String, Object> claims = new HashMap<>();
-            claims.put("id_u", id_u);
-            String jwt = this.jwtservice.createToken(claims, request.getNom());
-            return ResponseEntity.ok(new Authreponse(jwt));
+            int code =this.verificationserv.genererCode(id_u);
+      
+            this.emailService.sendEmail("safanasri002@gmail.com","Verification ",String.valueOf(code));
+            /*this.emailService.sendEmail("","Verification ",String.valueOf(code));*/
+
+            return ResponseEntity.ok(new Authreponse(id_u));
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
         }
-    }*/
+    }
+
+    @CrossOrigin
+    @PostMapping("/verification-admin")
+    public ResponseEntity<?> verificationadmin(@RequestBody Verificationrequest request) {
+        String reponse=this.verificationserv.verifierCode(request.getId_u(),request.getCode());
+
+        if(reponse.equals("code expire")){
+           return ResponseEntity.ok(new Verificationreponse("code expire"));
+        }else if(reponse.equals("code incorrect"))return ResponseEntity.ok(new Verificationreponse("code incorrect"));
+        else{
+            Map<String, Object> claims = new HashMap<>();
+            claims.put("role","admin");
+
+            String jwt = this.jwtservice.createToken(claims,String.valueOf(request.getId_u()));
+            return ResponseEntity.ok(new Verificationreponse("code correct",jwt));
+        }}
 
 }
