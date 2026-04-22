@@ -62,11 +62,7 @@ public class JWTservice {
                 .parseClaimsJws(token)
                 .getBody();
     }
-     public  Integer extractid_u(String token){
-        Claims claims=extractAllClaims(token);
-        
-        return (int)claims.get("id_u");
-     }
+ 
 
     private Boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());

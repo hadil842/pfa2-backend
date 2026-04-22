@@ -48,7 +48,7 @@ public class TableauBordclient {
 
         if(token.equals(""))ResponseEntity.badRequest();
      System.out.println(token);
-         int id_u=this.jwTservice.extractid_u(token);
+         int id_u=Integer.parseInt(this.jwTservice.getSubjectFromToken(token));;
          Client cl=this.clientservice.getClient(id_u);
          int id_cp=this.compteservice.getIdcompte(cl);
 
