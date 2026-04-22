@@ -2,10 +2,13 @@ package com.example.backend.DTO;
 
 public class Authreponse {
 
-    private int code;
+   
     private int idu;
-    public Authreponse(int code, int idu, String etat) {
-        this.code = code;
+    public Authreponse(int idu) {
+        this.idu = idu;
+    }
+
+    public Authreponse(int idu, String etat) {
         this.idu = idu;
         this.etat = etat;
     }
@@ -18,16 +21,10 @@ public class Authreponse {
         this.idu = idu;
     }
 
-    public void setCode(int code) {
-        this.code = code;
-    }
-
+   
     private String etat;
 
-    public Authreponse(int code, String etat) {
-        this.code = code;
-        this.etat = etat;
-    }
+    
 
     public String getEtat() {
         return etat;
@@ -37,9 +34,7 @@ public class Authreponse {
         this.etat = etat;
     }
 
-    public Integer getCode() {
-        return this.code;
-    }
+    
 
    
 }

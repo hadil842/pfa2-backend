@@ -19,6 +19,9 @@ public class Kycscore {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idkysc;
 
+    public Kycscore() {
+    }
+
     private int valeur;
     public int getValeur() {
         return valeur;

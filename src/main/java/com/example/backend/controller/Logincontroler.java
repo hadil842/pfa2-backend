@@ -55,9 +55,9 @@ public class Logincontroler {
                 int code =this.verificationserv.genererCode(id_u);
       
                 this.emailService.sendEmail("safanasri002@gmail.com","Verification ",String.valueOf(code));
-                /*this.emailService.sendEmail("****","Verification ",String.valueOf(code));*/
+                /*this.emailService.sendEmail("","Verification ",String.valueOf(code));*/
 
-                return ResponseEntity.ok(new Authreponse(code,id_u ,etat));
+                return ResponseEntity.ok(new Authreponse(id_u ,etat));
             }
            
         } else {
