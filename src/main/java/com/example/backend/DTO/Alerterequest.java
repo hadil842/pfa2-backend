@@ -1,12 +1,12 @@
 package com.example.backend.DTO;
 
 public class Alerterequest {
- private long numerocpt;
- public long getNumerocpt() {
+ private String numerocpt;
+ public String getNumerocpt() {
     return numerocpt;
 }
 
- public void setNumerocpt(long numerocpt) {
+ public void setNumerocpt(String numerocpt) {
     this.numerocpt = numerocpt;
  }
 
@@ -19,17 +19,17 @@ public String getCause() {
     this.cause = cause;
  }
 
-private int codesecret;
+private String codesecret;
 
- public int getCodesecret() {
+ public String getCodesecret() {
     return codesecret;
 }
 
-public void setCodesecret(int codesecret) {
+public void setCodesecret(String codesecret) {
     this.codesecret = codesecret;
 }
 
- public Alerterequest(long numerocpt, String cause, int codesecret) {
+ public Alerterequest(String numerocpt, String cause, String codesecret) {
     this.numerocpt = numerocpt;
     this.cause = cause;
     this.codesecret = codesecret;

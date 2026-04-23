@@ -28,7 +28,7 @@ public class Alertecontroler {
         this.emailServ = emailServ;
     }
 
-
+@CrossOrigin
 @PostMapping("/alerte")
  public ResponseEntity<?> envoyeralerte (HttpServletRequest  request,@RequestBody Alerterequest alerte){
 
@@ -39,7 +39,7 @@ public class Alertecontroler {
 
          int id_u=Integer.parseInt(this.jwtserv.getSubjectFromToken(token));
          this.emailServ.sendEmail("safanasri002@gmail.com","Alerte ",alerte.getCause());
-         String reponse=this.alerteserv.savealerte(alerte.getNumerocpt(), alerte.getCause(), alerte.getCodesecret(),id_u);
+         String reponse=this.alerteserv.savealerte(Long.parseLong(alerte.getNumerocpt()), alerte.getCause(), Integer.parseInt(alerte.getCodesecret()),id_u);
          return ResponseEntity.ok(reponse) ;
 
      }
