@@ -36,7 +36,8 @@ public class Securityconfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http, @Autowired Jwtfilter jwtf) throws Exception {
         http.csrf(csrf -> csrf.disable()).cors(Customizer.withDefaults())
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/loginclient", "/loginadmin","/verification-admin","/verification-client","/error")
+                        .requestMatchers("/loginclient", "/loginadmin",
+                        "/verification-admin","/verification-client","/error","/renvoie-code")
                         .permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

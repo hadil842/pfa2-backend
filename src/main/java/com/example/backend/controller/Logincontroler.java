@@ -54,7 +54,7 @@ public class Logincontroler {
             else {
                 int code =this.verificationserv.genererCode(id_u);
       
-                this.emailService.sendEmail("safanasri002@gmail.com","Verification ",String.valueOf(code));
+                this.emailService.sendEmail("hadilkharroubi85@gmail.com","Verification ",String.valueOf(code));
                 /*this.emailService.sendEmail("","Verification ",String.valueOf(code));*/
 
                 return ResponseEntity.ok(new Authreponse(id_u ,etat));
@@ -101,7 +101,7 @@ public class Logincontroler {
         if (id_u != 0) {
             int code =this.verificationserv.genererCode(id_u);
       
-            this.emailService.sendEmail("safanasri002@gmail.com","Verification ",String.valueOf(code));
+            this.emailService.sendEmail("hadilkharroubi85@gmail.com","Verification ",String.valueOf(code));
             /*this.emailService.sendEmail("","Verification ",String.valueOf(code));*/
 
             return ResponseEntity.ok(new Authreponse(id_u));
@@ -125,5 +125,14 @@ public class Logincontroler {
             String jwt = this.jwtservice.createToken(claims,String.valueOf(request.getId_u()));
             return ResponseEntity.ok(new Verificationreponse("code correct",jwt));
         }}
-
+    
+    @CrossOrigin
+    @PostMapping("/renvoie-code")
+    public ResponseEntity<?>renvoiecode(@RequestBody Integer id_u){
+        int code =this.verificationserv.genererCode(id_u);
+      
+        this.emailService.sendEmail("hadilkharroubi85@gmail.com","Vérification ",String.valueOf(code));
+        return ResponseEntity.ok("Code envoyé");
+    }
+    
 }
