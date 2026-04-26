@@ -29,11 +29,12 @@ public class Logincontroler {
     private Verificationservice verificationserv;
     private EmailService emailService;
 
-    public Logincontroler(Userlogin userservice, JWTservice jwtservice, Verificationservice verificationserv,EmailService emailService) {
+    public Logincontroler(Userlogin userservice, JWTservice jwtservice, Verificationservice verificationserv,
+            EmailService emailService) {
         this.userservice = userservice;
         this.jwtservice = jwtservice;
         this.verificationserv = verificationserv;
-        this.emailService=emailService;
+        this.emailService = emailService;
     }
 
     @CrossOrigin
@@ -50,59 +51,54 @@ public class Logincontroler {
 
         if (id_u != 0) {
 
-            if(etat.equals("bloqué "))return ResponseEntity.ok(new Authreponse(0, etat));
+            if (etat.equals("bloqué "))
+                return ResponseEntity.ok(new Authreponse(0, etat));
             else {
-                int code =this.verificationserv.genererCode(id_u);
-      
-                this.emailService.sendEmail("hadilkharroubi85@gmail.com","Verification ",String.valueOf(code));
-                /*this.emailService.sendEmail("","Verification ",String.valueOf(code));*/
+                int code = this.verificationserv.genererCode(id_u);
 
-                return ResponseEntity.ok(new Authreponse(id_u ,etat));
+                this.emailService.sendEmail("linaaggoun2004@gmail.com", "Verification ", String.valueOf(code));
+                /* this.emailService.sendEmail("","Verification ",String.valueOf(code)); */
+
+                return ResponseEntity.ok(new Authreponse(id_u, etat));
             }
-           
+
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
         }
     }
+
     @CrossOrigin
     @PostMapping("/verification-client")
     public ResponseEntity<?> verificationclient(@RequestBody Verificationrequest request) {
-        String reponse=this.verificationserv.verifierCode(request.getId_u(),request.getCode());
+        String reponse = this.verificationserv.verifierCode(request.getId_u(), request.getCode());
 
-        if(reponse.equals("code expire")){
-           return ResponseEntity.ok(new Verificationreponse("code expire"));
-        }else if(reponse.equals("code incorrect"))return ResponseEntity.ok(new Verificationreponse("code incorrect"));
-        else{
+        if (reponse.equals("code expire")) {
+            return ResponseEntity.ok(new Verificationreponse("code expire"));
+        } else if (reponse.equals("code incorrect"))
+            return ResponseEntity.ok(new Verificationreponse("code incorrect"));
+        else {
             Map<String, Object> claims = new HashMap<>();
-            claims.put("role","client");
+            claims.put("role", "client");
 
-            String jwt = this.jwtservice.createToken(claims,String.valueOf(request.getId_u()));
-            return ResponseEntity.ok(new Verificationreponse("code correct",jwt));
-        }}
-       
-
-     
-
-    
-
-
-
-
+            String jwt = this.jwtservice.createToken(claims, String.valueOf(request.getId_u()));
+            return ResponseEntity.ok(new Verificationreponse("code correct", jwt));
+        }
+    }
 
     @CrossOrigin
     @PostMapping("/loginadmin")
     public ResponseEntity<?> loginAdmin(@RequestBody Authrequest request) {
 
-       int id_u = this.userservice.authenticateAdmin(request.getNom(), request.getMdp());
+        int id_u = this.userservice.authenticateAdmin(request.getNom(), request.getMdp());
 
         if (id_u == 0)
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Nom administrateur invalide");
 
         if (id_u != 0) {
-            int code =this.verificationserv.genererCode(id_u);
-      
-            this.emailService.sendEmail("hadilkharroubi85@gmail.com","Verification ",String.valueOf(code));
-            /*this.emailService.sendEmail("","Verification ",String.valueOf(code));*/
+            int code = this.verificationserv.genererCode(id_u);
+
+            this.emailService.sendEmail("hadilkharroubi85@gmail.com", "Verification ", String.valueOf(code));
+            /* this.emailService.sendEmail("","Verification ",String.valueOf(code)); */
 
             return ResponseEntity.ok(new Authreponse(id_u));
         } else {
@@ -113,26 +109,28 @@ public class Logincontroler {
     @CrossOrigin
     @PostMapping("/verification-admin")
     public ResponseEntity<?> verificationadmin(@RequestBody Verificationrequest request) {
-        String reponse=this.verificationserv.verifierCode(request.getId_u(),request.getCode());
+        String reponse = this.verificationserv.verifierCode(request.getId_u(), request.getCode());
 
-        if(reponse.equals("code expire")){
-           return ResponseEntity.ok(new Verificationreponse("code expire"));
-        }else if(reponse.equals("code incorrect"))return ResponseEntity.ok(new Verificationreponse("code incorrect"));
-        else{
+        if (reponse.equals("code expire")) {
+            return ResponseEntity.ok(new Verificationreponse("code expire"));
+        } else if (reponse.equals("code incorrect"))
+            return ResponseEntity.ok(new Verificationreponse("code incorrect"));
+        else {
             Map<String, Object> claims = new HashMap<>();
-            claims.put("role","admin");
+            claims.put("role", "admin");
 
-            String jwt = this.jwtservice.createToken(claims,String.valueOf(request.getId_u()));
-            return ResponseEntity.ok(new Verificationreponse("code correct",jwt));
-        }}
-    
+            String jwt = this.jwtservice.createToken(claims, String.valueOf(request.getId_u()));
+            return ResponseEntity.ok(new Verificationreponse("code correct", jwt));
+        }
+    }
+
     @CrossOrigin
     @PostMapping("/renvoie-code")
-    public ResponseEntity<?>renvoiecode(@RequestBody Integer id_u){
-        int code =this.verificationserv.genererCode(id_u);
-      
-        this.emailService.sendEmail("hadilkharroubi85@gmail.com","Vérification ",String.valueOf(code));
+    public ResponseEntity<?> renvoiecode(@RequestBody Integer id_u) {
+        int code = this.verificationserv.genererCode(id_u);
+
+        this.emailService.sendEmail("hadilkharroubi85@gmail.com", "Vérification ", String.valueOf(code));
         return ResponseEntity.ok("Code envoyé");
     }
-    
+
 }

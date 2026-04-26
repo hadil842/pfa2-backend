@@ -37,7 +37,8 @@ public class Securityconfig {
         http.csrf(csrf -> csrf.disable()).cors(Customizer.withDefaults())
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/loginclient", "/loginadmin",
-                        "/verification-admin","/verification-client","/error","/renvoie-code")
+                                "/verification-admin", "/verification-client", "/error", "/renvoie-code", "/envoie",
+                                "/confirmer")
                         .permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

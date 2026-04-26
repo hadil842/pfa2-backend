@@ -1,6 +1,6 @@
 package com.example.backend.entity;
+
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,35 +11,40 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="alerte")
+@Table(name = "alerte")
 public class Alerte {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idal;
-    private LocalDateTime date ;
+    private LocalDateTime date;
     private String cause;
+
     public String getCause() {
         return cause;
     }
+
     public void setCause(String cause) {
         this.cause = cause;
     }
 
     @ManyToOne
-    @JoinColumn(name="idclient")
+    @JoinColumn(name = "idclient")
     private Client client;
-    
+
     @ManyToOne
-    @JoinColumn(name="idadmin")
+    @JoinColumn(name = "idadmin")
     private Administrateur administrateur;
-     
-    public Alerte() {}
-    public Alerte(LocalDateTime date, Client client, Administrateur administrateur,String cause) {
+
+    public Alerte() {
+    }
+
+    public Alerte(LocalDateTime date, Client client, Administrateur administrateur, String cause) {
         this.date = date;
         this.client = client;
         this.administrateur = administrateur;
-        this.cause=cause;
+        this.cause = cause;
     }
+
     public int getId_al() {
         return idal;
     }
@@ -67,6 +72,5 @@ public class Alerte {
     public void setAdministrateur(Administrateur administrateur) {
         this.administrateur = administrateur;
     }
-
 
 }
