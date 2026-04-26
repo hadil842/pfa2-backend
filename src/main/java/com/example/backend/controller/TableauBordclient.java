@@ -5,6 +5,7 @@ import java.util.List;
 
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,10 +17,9 @@ import com.example.backend.entity.Client;
 import com.example.backend.entity.Compte;
 import com.example.backend.service.Clientservice;
 import com.example.backend.service.Compteservice;
-import com.example.backend.service.JWTservice;
 import com.example.backend.service.Transactionservice;
 
-import jakarta.servlet.http.HttpServletRequest;
+
 
 
 
@@ -30,27 +30,22 @@ public class TableauBordclient {
 
      private Compteservice compteservice;
      private Clientservice clientservice;
-     private JWTservice jwTservice;
      private Transactionservice transactionservice;
 
-    public TableauBordclient(Compteservice compteservice, Clientservice clientservice, JWTservice jwTservice,Transactionservice transactionservice) {
+    public TableauBordclient(Compteservice compteservice, Clientservice clientservice,Transactionservice transactionservice) {
         this.compteservice = compteservice;
         this.clientservice = clientservice;
-        this.jwTservice = jwTservice;
         this.transactionservice=transactionservice;
     }
 
     @CrossOrigin
     @PostMapping("/tableau-bord-donnes")
-    public ResponseEntity<?> getDonnes(HttpServletRequest  request) {
-        String authorizationHeader = request.getHeader("Authorization");
-        String token = authorizationHeader.substring(7);
+    public ResponseEntity<?> getDonnes() {
 
-        if(token.equals(""))ResponseEntity.badRequest();
-     System.out.println(token);
-         int id_u=Integer.parseInt(this.jwTservice.getSubjectFromToken(token));;
-         Client cl=this.clientservice.getClient(id_u);
-         int id_cp=this.compteservice.getIdcompte(cl);
+        String userId = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        int id_u = Integer.parseInt(userId);
+        Client cl=this.clientservice.getClient(id_u);
+        int id_cp=this.compteservice.getIdcompte(cl);
 
          
         return ResponseEntity.ok(new Tableaureponse(this.clientservice.getNomComplet(id_u),
@@ -61,13 +56,11 @@ public class TableauBordclient {
     
     @CrossOrigin
     @PostMapping("/tableau-bord-transactions")
-    public ResponseEntity<?>getTransactions(HttpServletRequest  request){
+    public ResponseEntity<?>getTransactions(){
 
-         String authorizationHeader = request.getHeader("Authorization");
-         String token = authorizationHeader.substring(7);
-         if(token.equals(""))ResponseEntity.badRequest();
+         String userId = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+         int id_u = Integer.parseInt(userId);
 
-         int id_u=Integer.parseInt(this.jwTservice.getSubjectFromToken(token));
          Client cl=this.clientservice.getClient(id_u);
          int id_cp=this.compteservice.getIdcompte(cl);
          Compte compte=this.compteservice.getCompte(id_cp);
@@ -79,14 +72,11 @@ public class TableauBordclient {
 
     @CrossOrigin
     @PostMapping("/courbe-transactions")
-    public ResponseEntity<List<Recordreponse>>getCourbe(HttpServletRequest  request){
+    public ResponseEntity<List<Recordreponse>>getCourbe(){
 
-         String authorizationHeader = request.getHeader("Authorization");
-         String token = authorizationHeader.substring(7);
+         String userId = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+         int id_u = Integer.parseInt(userId);
 
-         if(token.equals(""))ResponseEntity.badRequest();
-
-        int id_u=Integer.parseInt(this.jwTservice.getSubjectFromToken(token));
          Client cl=this.clientservice.getClient(id_u);
          int id_cp=this.compteservice.getIdcompte(cl);
          Compte compte=this.compteservice.getCompte(id_cp);
