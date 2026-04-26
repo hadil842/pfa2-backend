@@ -1,12 +1,16 @@
 package com.example.backend.service;
 
 import java.math.BigDecimal;
+import java.util.Date;
+
 import org.springframework.stereotype.Service;
 
-import com.example.backend.DTO.Virementrequest;
+import com.example.backend.entity.Client;
 import com.example.backend.entity.Compte;
+import com.example.backend.entity.Virement;
 import com.example.backend.repository.Clientrepository;
 import com.example.backend.repository.Compterepository;
+import com.example.backend.repository.Virementrepository;
 
 import jakarta.transaction.Transactional;
 
@@ -17,7 +21,8 @@ public class Virementservice {
     public Clientrepository clientrepository;
     public Compterepository compterepository;
     public Verificationservice codeser;
-    public Redisservice redisser;
+    public Redisservice redisservice;
+    public Virementrepository virmentrepo;
 
     public Virementservice(EmailService email, Clientrepository clientrepository, Compterepository compterepository,
             Verificationservice codeser, Redisservice redisser) {
@@ -25,62 +30,77 @@ public class Virementservice {
         this.clientrepository = clientrepository;
         this.compterepository = compterepository;
         this.codeser = codeser;
-        this.redisser = redisser;
+        this.redisservice = redisser;
     }
 
-    public void preparerVirement(Virementrequest request) {
-        Compte source = this.compterepository.findByNumcompte(request.getSource());
-        if (source == null) {
+    public void preparerVirement(int idclient,long numdest,BigDecimal montant,int codesecret,String nomrecep) {
+        Client client=this.clientrepository.findById(idclient);
+        Compte comptesource = this.compterepository.findByClient(client);
+
+
+        if (comptesource == null) {
             throw new RuntimeException("Compte source introuvable");
         }
 
-        String data = request.getSource() + "," + request.getDestination() + "," + request.getMontant() + ","
-                + request.getCodesecret();
-        int idClient = source.getClient().getId();
+        String data = comptesource.getNumcompte()+ "," + numdest+ "," + montant + ","
+                + codesecret+","+nomrecep;
 
-        redisser.saveVirement(idClient, data);
-        int code = codeser.genererCode(idClient);
-        String emailDestinataire = source.getClient().getEmail();
+        redisservice.saveVirement(idclient, data);
+        int code = codeser.genererCode(idclient);
+        String emailDestinataire = client.getEmail();
         String sujet = "Validation de votre virment";
         String message = "Bonjour, votre code de confirmation pour le virement est : " + code;
         email.sendEmail(emailDestinataire, sujet, message);
     }
 
     @Transactional
-    public boolean effectuerVirement(int id_u, int code) {
+    public String effectuerVirement(int id_u, int code) {
         String result = codeser.verifierCode(id_u, code);
         if (!"code correct".equals(result)) {
-            return false;
+            return "code email incorrect " ;
         }
-        String data = redisser.getVirement(id_u);
+        String data = redisservice.getVirement(id_u);
         if (data == null) {
-            return false;
+            return "cordonnes sont vides";
         }
         String[] parts = data.split(",");
-        if (parts.length < 3) {
-            return false;
-        }
-        long source = Long.parseLong(parts[0]);
-        long destination = Long.parseLong(parts[1]);
+
+        long numsource = Long.parseLong(parts[0]);
+        long numdestination = Long.parseLong(parts[1]);
         BigDecimal montant = new BigDecimal(parts[2]);
-        Compte csource = this.compterepository.findByNumcompte(source);
-        Compte cdestination = this.compterepository.findByNumcompte(destination);
+        int codesecret=Integer.parseInt(parts[3]);
+        String nomrecep=parts[4];
 
-        if (csource == null || cdestination == null) {
-            return false;
+        Compte comptesource = this.compterepository.findByNumcompte(numsource);
+        Compte comptedestination = this.compterepository.findByNumcompte(numdestination);
+
+        if (comptedestination == null) {
+            return "numero de compte destination invalide ";
         }
-        if (csource.getSolde().compareTo(montant) < 0) {
-            return false;
+        if(! nomrecep.equals(comptedestination.getClient().getFullname())){
+            return "nom du recepteur incompatible";
+        }
+        if (comptesource.getSolde().compareTo(montant) < 0) {
+            return "montant inferieur";
         }
 
-        csource.setSolde(csource.getSolde().subtract(montant));
-        cdestination.setSolde(cdestination.getSolde().add(montant));
+        if(codesecret!=comptesource.getCode_secret_compte()){
+            return "code secret invalide";
+        }
 
-        compterepository.save(csource);
-        compterepository.save(cdestination);
+        comptesource.setSolde(comptesource.getSolde().subtract(montant));
+        comptedestination.setSolde(comptedestination.getSolde().add(montant));
 
-        redisser.deleteVirement(id_u);
-        return true;
+        compterepository.save(comptesource);
+        compterepository.save(comptedestination);
+
+       
+        Virement vir=new Virement(new Date(),montant,"en ligne","en ligne","validee",nomrecep,numdestination);
+       
+        this.virmentrepo.save(vir);
+        
+        redisservice.deleteVirement(id_u);
+        return "virement effectuee avec secret ";
 
     }
 

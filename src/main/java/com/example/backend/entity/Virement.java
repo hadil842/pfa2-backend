@@ -14,12 +14,13 @@ public class Virement extends Transactions{
    private long numcompterece;
    private String nomrece;
 
-    public Virement(){super();}
-    Virement( Date date_heure, BigDecimal montant, int duree, String localisation, String statut,int type_fr, String nom_rece, int num_copmte_erce,BigDecimal dp) {
-        super( date_heure, montant, duree, localisation, statut, type_fr,dp);
+    
+    public Virement( Date date_heure, BigDecimal montant, String localisation, String marchandcateg,String statut, String nom_rece, long  num_copmte_erce) {
+        super( date_heure, montant, localisation,marchandcateg, statut);
         this.nomrece = nom_rece;
         this.numcompterece = num_copmte_erce;
     }
+
 
     public long getNum_copmte_erce() {
         return numcompterece;

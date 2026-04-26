@@ -24,17 +24,12 @@ public class Transactions {
     private int idtr;
     private Date dateheure;
     private BigDecimal montant;
-    private int duree;
     private String localisation;
+    private String marchandcateg ;
     private String statut;
     private Integer typefr;
-    private BigDecimal adrsipscr;
-    public BigDecimal getAdrsipscr() {
-        return adrsipscr;
-    }
-    public void setAdrsipscr(BigDecimal adrsipscr) {
-        this.adrsipscr = adrsipscr;
-    }
+
+    
 
     @ManyToOne
     @JoinColumn (name="idadmin")
@@ -51,14 +46,12 @@ public class Transactions {
 
     public Transactions() {}
 
-     Transactions(Date dateheure, BigDecimal montant, int duree, String localisation, String statut,Integer type_fr,BigDecimal val) {
+     Transactions(Date dateheure, BigDecimal montant, String localisation,String marchandcateg, String statut) {
         this.dateheure = dateheure;
         this.montant = montant;
-        this.duree = duree;
         this.localisation = localisation;
+        this.marchandcateg=marchandcateg;
         this.statut = statut;
-        this.typefr = type_fr;
-        this.adrsipscr=val;
     }
      public int getId_tr() {
          return idtr;
@@ -78,12 +71,12 @@ public class Transactions {
      public void setMontant(BigDecimal montant) {
          this.montant = montant;
      }
-     public int getDuree() {
-         return duree;
-     }
-     public void setDuree(int duree) {
-         this.duree = duree;
-     }
+     public String getMarchandcateg() {
+        return marchandcateg;
+    }
+    public void setMarchandcateg(String marchandcateg) {
+        this.marchandcateg = marchandcateg;
+    }
      public String getLocalisation() {
          return localisation;
      }

@@ -1,5 +1,13 @@
 package com.example.backend.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.backend.DTO.Authreponse;
@@ -10,15 +18,6 @@ import com.example.backend.service.EmailService;
 import com.example.backend.service.JWTservice;
 import com.example.backend.service.Userlogin;
 import com.example.backend.service.Verificationservice;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 @CrossOrigin(origins = { "http://localhost:4200", "null", "http://localhost:9090" })
 @RestController
@@ -38,7 +37,7 @@ public class Logincontroler {
     }
 
     @CrossOrigin
-    @PostMapping("/loginclient")
+    @PostMapping("/login-client")
     public ResponseEntity<?> loginclient(@RequestBody Authrequest request) {
 
         Map<String, Object> dict = this.userservice.authenticateClient(request.getNom(), request.getMdp());
@@ -72,6 +71,7 @@ public class Logincontroler {
     public ResponseEntity<?> verificationclient(@RequestBody Verificationrequest request) {
         String reponse = this.verificationserv.verifierCode(request.getId_u(), request.getCode());
 
+        System.out.println(request.getCode());
         if (reponse.equals("code expire")) {
             return ResponseEntity.ok(new Verificationreponse("code expire"));
         } else if (reponse.equals("code incorrect"))
@@ -86,7 +86,7 @@ public class Logincontroler {
     }
 
     @CrossOrigin
-    @PostMapping("/loginadmin")
+    @PostMapping("/login-admin")
     public ResponseEntity<?> loginAdmin(@RequestBody Authrequest request) {
 
         int id_u = this.userservice.authenticateAdmin(request.getNom(), request.getMdp());

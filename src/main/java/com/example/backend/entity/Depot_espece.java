@@ -13,7 +13,7 @@ public class Depot_espece extends Transactions {
 
     public Depot_espece(){super();}
     
-    Depot_espece( Date date_heure, BigDecimal montant, int duree, String localisation, String statut,int type_fr,BigDecimal dp) {
-        super( date_heure, montant, duree, localisation, statut, type_fr,dp);}
+    Depot_espece( Date date_heure, BigDecimal montant, String localisation,String marchandcateg, String statut) {
+        super( date_heure, montant, localisation,marchandcateg, statut);}
 
 }

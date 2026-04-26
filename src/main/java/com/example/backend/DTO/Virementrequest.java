@@ -1,62 +1,50 @@
 package com.example.backend.DTO;
 
-import java.math.BigDecimal;
-
 public class Virementrequest {
-    private long source;
-    private long destination;
-    private BigDecimal montant;
-    private String nom;
-    private int codesecret;
 
-    public Virementrequest(long source, long destination, BigDecimal montant, String nom, int codesecret) {
-        this.source = source;
-        this.destination = destination;
+    private String numdestination;
+    private String montant;
+    private String nomrecep;
+    private String codesecret;
+
+    public Virementrequest( String numdestination, String montant, String nom, String codesecret) {
+        this.numdestination = numdestination;
         this.montant = montant;
-        this.nom = nom;
+        this.nomrecep = nom;
         this.codesecret = codesecret;
     }
 
-    public int getCodesecret() {
+    public String getCodesecret() {
         return codesecret;
     }
 
-    public void setCodesecret(int codesecret) {
+    public void setCodesecret(String codesecret) {
         this.codesecret = codesecret;
     }
 
     public String getNom() {
-        return nom;
+        return nomrecep;
     }
 
     public void setNom(String nom) {
-        this.nom = nom;
+        this.nomrecep = nom;
     }
 
-    public long getSource() {
-        return source;
-    }
+    
 
-    public void setSource(long source) {
-        this.source = source;
-    }
-
-    public long getDestination() {
-        return destination;
-    }
-
-    public void setDestination(long destination) {
-        this.destination = destination;
-    }
-
-    public BigDecimal getMontant() {
+    public String getMontant() {
         return montant;
     }
 
-    public void setMontant(BigDecimal montant) {
+    public void setMontant(String montant) {
         this.montant = montant;
     }
 
-    public Virementrequest() {
+    public String getNumdestination() {
+        return numdestination;
+    }
+
+    public void setNumdestination(String numdestination) {
+        this.numdestination = numdestination;
     }
 }
