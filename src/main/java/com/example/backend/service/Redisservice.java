@@ -20,6 +20,7 @@ public class Redisservice {
                 data,
                 5,
                 TimeUnit.MINUTES);
+        System.out.println("done");
     }
 
     public String getVirement(int clientId) {

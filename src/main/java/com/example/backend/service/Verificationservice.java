@@ -52,7 +52,6 @@ public class Verificationservice {
          Utilisateur utili=this.utilirepo.findById(id_u);
 
          Code code=this.coderepo.findByUtilisateur(utili);
-         System.out.println(code.getCode());
         if(LocalDateTime.now().isBefore(code.getDate())){
             if(code.getCode()==cd)return "code correct";
             

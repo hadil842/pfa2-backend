@@ -14,8 +14,8 @@ public class Paiement extends Transactions{
     
     public Paiement(){super();}
     
-    Paiement( Date date_heure, BigDecimal montant, String localisation,String marchandcateg, String statut, String destination) {
-        super( date_heure, montant, localisation,marchandcateg,statut);
+    Paiement( Date date_heure, BigDecimal montant, String localisation,String marchandcateg, String statut, String destination,Compte compte) {
+        super( date_heure, montant, localisation,marchandcateg,statut,compte);
         this.destination = destination;}
 
     public String getDestination() {

@@ -40,19 +40,23 @@ public class Transactions {
     @ManyToOne
     @JoinColumn (name="idcp")
     private Compte compte;
+    public Transactions(Date dateheure, BigDecimal montant, String localisation, String marchandcateg,
+            String statut, Compte compte) {
+        
+        this.dateheure = dateheure;
+        this.montant = montant;
+        this.localisation = localisation;
+        this.marchandcateg = marchandcateg;
+        this.statut = statut;
+        this.compte = compte;
+    }
     public void setCompte(Compte cp) {this.compte = cp;}
     public Compte getCompte() {return compte;}
 
 
     public Transactions() {}
 
-     Transactions(Date dateheure, BigDecimal montant, String localisation,String marchandcateg, String statut) {
-        this.dateheure = dateheure;
-        this.montant = montant;
-        this.localisation = localisation;
-        this.marchandcateg=marchandcateg;
-        this.statut = statut;
-    }
+     
      public int getId_tr() {
          return idtr;
      }

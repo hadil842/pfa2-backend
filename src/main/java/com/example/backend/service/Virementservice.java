@@ -24,13 +24,16 @@ public class Virementservice {
     public Redisservice redisservice;
     public Virementrepository virmentrepo;
 
+   
+
     public Virementservice(EmailService email, Clientrepository clientrepository, Compterepository compterepository,
-            Verificationservice codeser, Redisservice redisser) {
+            Verificationservice codeser, Redisservice redisservice, Virementrepository virmentrepo) {
         this.email = email;
         this.clientrepository = clientrepository;
         this.compterepository = compterepository;
         this.codeser = codeser;
-        this.redisservice = redisser;
+        this.redisservice = redisservice;
+        this.virmentrepo = virmentrepo;
     }
 
     public void preparerVirement(int idclient,long numdest,BigDecimal montant,int codesecret,String nomrecep) {
@@ -47,7 +50,7 @@ public class Virementservice {
 
         redisservice.saveVirement(idclient, data);
         int code = codeser.genererCode(idclient);
-        String emailDestinataire = client.getEmail();
+        String emailDestinataire = "hadilkharroubi85@gmail.com";
         String sujet = "Validation de votre virment";
         String message = "Bonjour, votre code de confirmation pour le virement est : " + code;
         email.sendEmail(emailDestinataire, sujet, message);
@@ -77,9 +80,7 @@ public class Virementservice {
         if (comptedestination == null) {
             return "numero de compte destination invalide ";
         }
-        if(! nomrecep.equals(comptedestination.getClient().getFullname())){
-            return "nom du recepteur incompatible";
-        }
+        
         if (comptesource.getSolde().compareTo(montant) < 0) {
             return "montant inferieur";
         }
@@ -95,12 +96,12 @@ public class Virementservice {
         compterepository.save(comptedestination);
 
        
-        Virement vir=new Virement(new Date(),montant,"en ligne","en ligne","validee",nomrecep,numdestination);
+        Virement vir=new Virement(new Date(),montant,"en ligne","en ligne","validee",nomrecep,numdestination,comptesource);
        
         this.virmentrepo.save(vir);
         
         redisservice.deleteVirement(id_u);
-        return "virement effectuee avec secret ";
+        return "virement effectuee avec succes ";
 
     }
 

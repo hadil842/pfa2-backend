@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.backend.DTO.VerificationVirement;
 import com.example.backend.DTO.Virementrequest;
-import com.example.backend.repository.Compterepository;
+
 import com.example.backend.service.JWTservice;
 import com.example.backend.service.Virementservice;
 
@@ -20,12 +20,10 @@ import jakarta.servlet.http.HttpServletRequest;
 @RestController
 public class Virementcontroller {
     private Virementservice virementser;
-    private Compterepository compterepo;
     private JWTservice jwTservice;
 
-    public Virementcontroller(Virementservice virementser, Compterepository compterepo, JWTservice jwTservice) {
+    public Virementcontroller(Virementservice virementser, JWTservice jwTservice) {
         this.virementser = virementser;
-        this.compterepo = compterepo;
         this.jwTservice = jwTservice;
     }
 
