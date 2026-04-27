@@ -44,6 +44,7 @@ public class TableauBordclient {
 
         String userId = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
         int id_u = Integer.parseInt(userId);
+        System.out.println(id_u);
         Client cl=this.clientservice.getClient(id_u);
         int id_cp=this.compteservice.getIdcompte(cl);
 

@@ -55,7 +55,7 @@ public class Logincontroler {
             else {
                 int code = this.verificationserv.genererCode(id_u);
 
-                this.emailService.sendEmail("linaaggoun2004@gmail.com", "Verification ", String.valueOf(code));
+                this.emailService.sendEmail("hadilkharroubi85@gmail.com", "Verification ", String.valueOf(code));
                 /* this.emailService.sendEmail("","Verification ",String.valueOf(code)); */
 
                 return ResponseEntity.ok(new Authreponse(id_u, etat));
@@ -71,7 +71,6 @@ public class Logincontroler {
     public ResponseEntity<?> verificationclient(@RequestBody Verificationrequest request) {
         String reponse = this.verificationserv.verifierCode(request.getId_u(), request.getCode());
 
-        System.out.println(request.getCode());
         if (reponse.equals("code expire")) {
             return ResponseEntity.ok(new Verificationreponse("code expire"));
         } else if (reponse.equals("code incorrect"))

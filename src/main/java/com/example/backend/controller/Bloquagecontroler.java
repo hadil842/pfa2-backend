@@ -23,7 +23,7 @@ public class Bloquagecontroler {
     public Bloquagecontroler(Bolquercompteservice bloqservice) {
         this.bloqservice = bloqservice;
     }
-
+   @CrossOrigin
    @PostMapping("/bloquercompte")
    public ResponseEntity<?> bloquercompte (@RequestBody Demandebloquage bloc){
 
@@ -32,7 +32,7 @@ public class Bloquagecontroler {
          
         return ResponseEntity.ok(this.bloqservice.bloquercompte(bloc.getNumcompte(),id_u, bloc.getCodesecret(), bloc.getCause()));
    }
-
+   @CrossOrigin
    @PostMapping("/debloquercompte")
    public ResponseEntity<?> debloquercompte (@RequestBody Demandebloquage bloc){
         String userId = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
