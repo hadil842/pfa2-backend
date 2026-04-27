@@ -62,7 +62,7 @@ public class Logincontroler {
             }
 
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Nom utilisateur ou mot de passe invalide");
         }
     }
 
@@ -101,7 +101,7 @@ public class Logincontroler {
 
             return ResponseEntity.ok(new Authreponse(id_u));
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Nom utilisateur ou mot de passe invalide");
         }
     }
 
